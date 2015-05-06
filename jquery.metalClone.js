@@ -116,7 +116,7 @@
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
 					destination.append(toClone.append('<input type="button" value="remove" class="metalBtnRemove">'));
-					if(opt.allValue){ clearForm(toClone); };
+					if(opt.copyValue){ /* never copy */}else{clearForm(toClone);}
 				}	
 			}
 			// If want to clone before
@@ -125,7 +125,7 @@
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
 					destination.prepend(toClone.append('<input type="button" value="remove" class="metalBtnRemove">'));
-					if(opt.allValue){ clearForm(toClone); };
+					if(opt.copyValue){ /* never copy */}else{clearForm(toClone);}
 				}
 			}
 			
@@ -176,7 +176,7 @@
 						toClone.insertAfter(destination)
 							   .append('<input type="button" value="remove" class="metalBtnRemove">');
 
-					   if(opt.allValue){ clearForm(toClone); };
+					   if(opt.copyValue){ /* never copy */}else{clearForm(toClone);}
 						
 
 				}
@@ -190,7 +190,7 @@
 					toClone.insertBefore(destination)
 						   .append('<input type="button" value="remove" class="metalBtnRemove">');
 
-					if(opt.allValue){ clearForm(toClone); };
+					if(opt.copyValue){ /* never copy */}else{clearForm(toClone);}
 				}	
 			}
 
@@ -257,8 +257,9 @@
 					if($(this).attr('id')){
 						// Get the original value
 						var oldValue = $(this).attr('id');
+						//var increValue = 
 						// Set the new id(s) value
-						$(this).attr('id',oldValue + inc);
+						$(this).attr('id',oldValue + parseInt(inc));
 					}
 				});
 			
@@ -309,7 +310,7 @@
 										// ~~~~~ all HTML tag are availeble
 										
 		btnClone	: '.metalBtnClone',	// Put your selector(button class or id name) eg : .clickMe | #clickMe
-		allValue 	: false				// Clone together the previous element value - available for form element only
+		copyValue 	: false				// Clone together the previous element value - available for form element only
 
 		// Please wait for callback option.. coming soon..
 

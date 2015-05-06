@@ -34,6 +34,7 @@
         <input type="button" class="k" value="kk">
 	</div>
 
+
 	<div class="dest">asd
 	</div>
 
@@ -45,8 +46,10 @@
 			//destination : '.dest',
 			//position : 'before',
 			ids : ['*'],
-			allValue : true
+			copyValue : false
 		});
+
+		
 
 	});
 	</script>
