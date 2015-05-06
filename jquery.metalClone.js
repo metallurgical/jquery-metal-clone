@@ -12,6 +12,8 @@
 
 		}*/
 
+		// Get the selector
+		// To see either class or ids were used
 		var typeSelector = this.selector;
 		var element;
 		
@@ -22,12 +24,17 @@
 		    	element = $(this).first();
 		    }
 		    else {
+		    	// If the selector is an ID
+		    	// return  its object
 		    	element = $(this);
 		    }
 
 		
 		/*===============================================
 		| Default clone button
+		|================================================
+		| If user did't not provided the class or id name for 
+		| cloned button, then system will provided one
 		|================================================*/
 		if (opt.btnClone === '.metalBtnClone') {
 
@@ -46,14 +53,18 @@
 		|================================================*/
 		$(document).on('click', opt.btnClone, function(){
 
+			// Store the destination of cloned element
 			var destinationClone;
 
 			// If destination provided, 
 			// then use user defined destination
 			if (opt.destination !== false){
 
+				// Use user defined destination
 				destinationClone = $(opt.destination);
 
+				// Put either after or before depend
+				// on user defined position
 				if (opt.position === "after"){
 					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, opt.position);
 				} else {
@@ -62,7 +73,7 @@
 
 			} 
 
-			// else just clone element 
+			// If did't provied,just clone element 
 			// after/before cloned element
 			else {
 
@@ -75,8 +86,7 @@
 				}
 			}
 
-			// Create remove button
-			// Remove cloned element
+			
 			
 			
 
@@ -94,13 +104,20 @@
 		|===============================================*/
 		function loopCloneAppendPrepend(numberToClone, elementClone, destination, position){
 
-			var cloneObj = elementClone;   
+			// Cache the clone obj
+			var cloneObj = elementClone; 
+			// If user put 0,
+			// Then assign 1 as a default value
+			// else use the provided value
+			numberToClone = (numberToClone == 0) ? 1 : numberToClone;  
 
+			// If want to clone after
 			if (position === "after"){
 				for(var i = 0; i < numberToClone; i++){
 					destination.append(cloneObj.clone().append('<input type="button" value="remove" class="metalBtnRemove">'));
 				}	
 			}
+			// If want to clone before
 			else if (position === "before"){
 
 				for(var i = 0; i < numberToClone; i++){
@@ -108,7 +125,21 @@
 				}
 			}
 			
-			idIncreament();
+			// If the opt.ids is an empty array
+			// Is a default value
+			if($.isArray(opt.ids) && $.isEmptyObject(opt.ids)){
+				// id will not increament
+				// do nothing
+				// console.log('ss');
+			}
+			// If user provided element in array container
+			// Then call the function
+			// pass the opt.ids array value[* or a few]
+			else if ($.isArray(opt.ids) && !$.isEmptyObject(opt.ids)){
+
+				// call the function
+				idIncreament(opt.ids);
+			}
 			return;
 		}
 
@@ -209,7 +240,9 @@
 					// to ensure all the same clone element
 					// have unique id value
 					if($(this).attr('id')){
+						// Get the original value
 						var oldValue = $(this).attr('id');
+						// Set the new id(s) value
 						$(this).attr('id',oldValue + inc);
 					}
 				});
@@ -243,15 +276,27 @@
 
 	$.fn.metalClone.defaults = {
 
-		destination : false,
-		position	: 'after',
-		numberToClone : 4,
-		ids		  	: [],
-		btnClone	: '.metalBtnClone',
-		onStart 	: null,
-		onStop 		: null,
-		onHalf 		: null,
-		onFinish 	: null
+		destination : false,			// Put your selector(parent container) eg : .myContainer | #myContainer
+		position	: 'after',			// Available in two option : after & before
+		numberToClone : 1,				// Number of element to clone
+		ids		  	: [],				// Element to increase the id(s) value, unique purpose
+										// eg : ['input','select','textarea']
+										// Available options :
+										// - input
+										// - select
+										// - textarea
+										// - div
+										// - span
+										// - i
+										// - strong
+										// - h1-h6
+										// - ......
+										// ~~~~~ all HTML tag are availeble
+										
+		btnClone	: '.metalBtnClone',	// Put your selector(button class or id name) eg : .clickMe | #clickMe
+		
+
+		// Please wait for callback option.. coming soon..
 
 	};
 	
