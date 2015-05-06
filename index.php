@@ -24,7 +24,8 @@
 		<div class="toClone">
 			<input type="text" id="a">
 			<select id="m">
-				<option value="">s</option>
+				<option value="">--</option>
+				<option value="s">s</option>
 			</select>
 		</div>
 		<!-- <div class="toClone">
@@ -41,9 +42,10 @@
 
 		$('.toClone').metalClone({
 			btnClone : '.k',
-			//destination : '.dest'
-			//position : 'before'
-			ids : ['*']
+			//destination : '.dest',
+			//position : 'before',
+			ids : ['*'],
+			allValue : true
 		});
 
 	});

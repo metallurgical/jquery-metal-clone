@@ -87,7 +87,7 @@
 			}
 
 			
-			
+
 			
 
 		})
@@ -114,14 +114,18 @@
 			// If want to clone after
 			if (position === "after"){
 				for(var i = 0; i < numberToClone; i++){
-					destination.append(cloneObj.clone().append('<input type="button" value="remove" class="metalBtnRemove">'));
+					var toClone = cloneObj.clone();
+					destination.append(toClone.append('<input type="button" value="remove" class="metalBtnRemove">'));
+					if(opt.allValue){ clearForm(toClone); };
 				}	
 			}
 			// If want to clone before
 			else if (position === "before"){
 
 				for(var i = 0; i < numberToClone; i++){
-					destination.prepend(cloneObj.clone().append('<input type="button" value="remove" class="metalBtnRemove">'));
+					var toClone = cloneObj.clone();
+					destination.prepend(toClone.append('<input type="button" value="remove" class="metalBtnRemove">'));
+					if(opt.allValue){ clearForm(toClone); };
 				}
 			}
 			
@@ -168,10 +172,13 @@
 
 				// Clone element[insert after the clone element]
 				for(var i = 0; i < numberToClone; i++){
-					cloneObj
-						.clone()
-						.insertAfter(destination)
-							.append('<input type="button" value="remove" class="metalBtnRemove">');
+					var toClone = cloneObj.clone();
+						toClone.insertAfter(destination)
+							   .append('<input type="button" value="remove" class="metalBtnRemove">');
+
+					   if(opt.allValue){ clearForm(toClone); };
+						
+
 				}
 			}
 			// If want to clone before
@@ -179,11 +186,11 @@
 
 				// Clone element[insert before]
 				for(var i = 0; i < numberToClone; i++){
+					var toClone = cloneObj.clone();
+					toClone.insertBefore(destination)
+						   .append('<input type="button" value="remove" class="metalBtnRemove">');
 
-					cloneObj
-						.clone()
-						.insertBefore(destination)
-							.append('<input type="button" value="remove" class="metalBtnRemove">');
+					if(opt.allValue){ clearForm(toClone); };
 				}	
 			}
 
@@ -205,6 +212,14 @@
 			
 			
 			return;
+		}
+
+
+		function clearForm(container){
+
+			container.find('input:not("input[type=button], input[type=submit]"), textarea, select').each(function(){
+				$(this).val('');
+			})
 		}
 
 
@@ -294,7 +309,7 @@
 										// ~~~~~ all HTML tag are availeble
 										
 		btnClone	: '.metalBtnClone',	// Put your selector(button class or id name) eg : .clickMe | #clickMe
-		
+		allValue 	: false				// Clone together the previous element value - available for form element only
 
 		// Please wait for callback option.. coming soon..
 
