@@ -37,22 +37,22 @@
 			Usage :
 				<ul> 
 					<li>Include Jquery in the head section.
-		<pre>
+<pre>
 <code class="language-markup">
 <script type="prism-html-markup">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		</script>
-		</code>
-		</pre>
+</script>
+</code>
+</pre>
 						</li>
 					<li>Include jquery.metalCheckAll plugin after jquery lib.
-		<pre>
+<pre>
 <code class="language-markup">
 <script type="prism-html-markup">
 <script src="jquery.metalClone.js"></script>
-		</script>
-		</code>
-		</pre>
+</script>
+</code>
+</pre>
 					</li>
 					<li> For full documentation, visit <a href="https://github.com/metallurgical/jquery-metal-clone" target="_blank">Github Documentation</a>.</li>
 				</ul>
@@ -72,12 +72,40 @@
 		<div class="container_body">			
         	<input type="button" class="btn_example1" value="Create New Copy">
         </div>
+        <div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example1">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+<div class="container_body">			
+    <input type="button" class="btn_example1" value="Create New Copy">
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example1').metalClone({
+	btnClone 	: '.btn_example1',
+	copyValue 	: false
+});
+</code>
+</pre>		
+		</div>
 	</div>
 
 
 
+
 	<div class="container">
-	<span><strong>Example 1 - Clone element [immediate after last element] with value copied.</strong></span>
+	<span><strong>Example 2 - Clone element [immediate after last element] with value copied.</strong></span>
 		<br/>
 		<div class="toClone_example2">
 			<input type="text">
@@ -89,6 +117,353 @@
 		<div class="container_body">			
         	<input type="button" class="btn_example2" value="Create New Copy">
         </div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example2">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+<div class="container_body">			
+    <input type="button" class="btn_example2" value="Create New Copy">
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example2').metalClone({
+	btnClone 	: '.btn_example2',
+	copyValue 	: true
+});
+</code>
+</pre>		
+</div>
+	</div>
+
+
+
+
+	<div class="container">
+	<span><strong>Example 3 - Clone element [before first element] without value copied.</strong></span>
+		<br/>
+		<div class="toClone_example3">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example3" value="Create New Copy">
+        </div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example3">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+<div class="container_body">			
+    <input type="button" class="btn_example3" value="Create New Copy">
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example3').metalClone({
+	btnClone 	: '.btn_example3',
+	position	: 'before',
+	copyValue 	: false
+});
+</code>
+</pre>		
+</div>
+	</div>
+
+
+
+
+	<div class="container">
+	<span><strong>Example 4 - Clone element [before first element] with value copied.</strong></span>
+		<br/>
+		<div class="toClone_example4">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example4" value="Create New Copy">
+        </div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example4">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+<div class="container_body">			
+    <input type="button" class="btn_example4" value="Create New Copy">
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example4').metalClone({
+	btnClone 	: '.btn_example4',
+	position	: 'before',
+	copyValue 	: true
+});
+</code>
+</pre>		
+</div>
+	</div>
+
+
+
+
+	<div class="container">
+	<span><strong>Example 5 - Clone element [immediate after last element] with specified the number of element to copy.</strong></span>
+		<br/>
+		<div class="toClone_example5">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example5" value="Create New Copy">
+        </div>
+
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example5">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+<div class="container_body">			
+    <input type="button" class="btn_example5" value="Create New Copy">
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example5').metalClone({
+	btnClone 		: '.btn_example5',
+	position		: 'after',
+	numberToClone 	: 5
+});
+</code>
+</pre>		
+</div>
+	</div>
+
+
+
+	<div class="container">
+	<span><strong>Example 6 - Clone element [immediate after last element] with specified the number of element to copy and the destination to place the newly cloned element.</strong></span>
+		<br/>
+		<div class="toClone_example6">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example6" value="Create New Copy">
+        </div>
+        <div class="toClone_example6_destination">
+			<span> Please place the newly cloned element here</span>
+		</div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example6">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+<div class="container_body">			
+    <input type="button" class="btn_example6" value="Create New Copy">
+</div>
+<div class="toClone_example6_destination">
+	<span> Please place the newly cloned element here</span>
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example6').metalClone({
+	btnClone 			: '.btn_example6',
+	position			: 'after',
+	numberToClone 		: 5,
+	destination 		: '.toClone_example6_destination'
+});
+</code>
+</pre>		
+</div>
+	</div>
+
+
+
+	<div class="container">
+	<span><strong>Example 7 - Clone element [immediate after last element] with specified the number of element to copy and the destination to place the newly cloned element with unique ID(s).</strong></span>
+		<br/>
+		<div class="toClone_example7">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example7" value="Create New Copy">
+        </div>
+        <div class="toClone_example7_destination">
+			<span> Please place the newly cloned element here</span>
+		</div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example7">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+<div class="container_body">			
+    <input type="button" class="btn_example7" value="Create New Copy">
+</div>
+<div class="toClone_example7_destination">
+	<span> Please place the newly cloned element here</span>
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example7').metalClone({
+	btnClone 			: '.btn_example7',
+	position			: 'after',
+	numberToClone 		: 5,
+	destination 		: '.toClone_example7_destination',
+	ids					: ['select']
+});
+</code>
+</pre>		
+</div>
+	</div>
+
+
+
+
+	<div class="container">
+	<span><strong>Example 8 - Clone element [immediate after last element] without specified clone button(will create new one with name "Create New Element").</strong></span>
+		<br/>
+		<div class="toClone_example8">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example8">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example8').metalClone({
+	position	: 'after'
+});
+</code>
+</pre>		
+</div>	
+	</div>
+
+
+	<div class="container">
+	<span><strong>Example 9 - Clone element [immediate after last element] with specified clone and remove button name.</strong></span>
+		<br/>
+		<div class="toClone_example9">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example9">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example9').metalClone({
+	position			: 'after',
+	btnRemoveText		: 'Please delete me from this',
+	btnCloneText		: 'Wow, make another copy'
+});
+</code>
+</pre>		
+</div>	
 	</div>
 
 
@@ -97,14 +472,64 @@
 
 		// Example 1
 		$('.toClone_example1').metalClone({
-			btnClone : '.btn_example1',
-			copyValue : true
+			btnClone 	: '.btn_example1',
+			copyValue 	: false
 		});
 
 		// Example 2
 		$('.toClone_example2').metalClone({
-			btnClone : '.btn_example2',
-			copyValue : false
+			btnClone 	: '.btn_example2',
+			copyValue 	: true
+		});
+
+		// Example 3
+		$('.toClone_example3').metalClone({
+			btnClone 	: '.btn_example3',
+			position	: 'before',
+			copyValue 	: false
+		});
+
+		// Example 4
+		$('.toClone_example4').metalClone({
+			btnClone 	: '.btn_example4',
+			position	: 'before',
+			copyValue 	: true
+		});
+
+		// Example 5
+		$('.toClone_example5').metalClone({
+			btnClone 		: '.btn_example5',
+			position		: 'after',
+			numberToClone 	: 5
+		});
+
+		// Example 6
+		$('.toClone_example6').metalClone({
+			btnClone 			: '.btn_example6',
+			position			: 'after',
+			numberToClone 		: 5,
+			destination 		: '.toClone_example6_destination'
+		});
+
+		// Example 7
+		$('.toClone_example7').metalClone({
+			btnClone 			: '.btn_example7',
+			position			: 'after',
+			numberToClone 		: 5,
+			destination 		: '.toClone_example7_destination',
+			ids					: ['select']
+		});
+
+		// Example 8
+		$('.toClone_example8').metalClone({
+			position			: 'after'
+		});
+
+		// Example 9
+		$('.toClone_example9').metalClone({
+			position			: 'after',
+			btnRemoveText		: 'Please delete me from this',
+			btnCloneText		: 'Wow, make another copy'
 		});
 
 		

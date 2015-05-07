@@ -1,4 +1,18 @@
-(function($){
+/*===================================================================
+ | jQuery Metal Clone Plugins 
+ |===================================================================
+ | http://thunderwide.com 
+ |
+ | @category   Plugins
+ | @author     Norlihazmey <norlihazmey89@thunderwide.com>
+ | @license    Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
+ |             and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ | @copyright  (c) 2015 Norlihazmey(metallurgical)
+ | @version    1.0.0
+ | @Github 	   https://github.com/metallurgical/jquery-metal-clone
+ |===================================================================*/
+
+;(function($){
 	
 
 	$.fn.metalClone = function(options , callback){
@@ -36,42 +50,66 @@
 		| If user did't not provided the class or id name for 
 		| cloned button, then system will provided one
 		|================================================*/
-		if (opt.btnClone === '.metalBtnClone') {
 
+		// initialize global variable for clone button
+		var currentBtnClone;
+
+		// If user not defined clone button, 
+		// then make new one
+		if (opt.btnClone === null) {
+			// create new clone button with unique id
+			currentBtnClone = "metalBtnClone"+Math.floor(Math.random()*9+1);
 			$('<input/>',{
 
 				type : 'button',
 				value : opt.btnCloneText,
-				class : 'btnClone'
+				class : currentBtnClone
 
 			}).insertAfter(typeSelector);
+
+			// Concat the . sysmbol at beggining of 
+			// class name for dynamic create button
+			currentBtnClone = '.'+currentBtnClone;
+		}
+		// if user defined the button itself,
+		// then use user defined button instead
+		else{
+			currentBtnClone = opt.btnClone;
 		}
 
-//console.log(opt.copyValue);
-		var currentCopyValue = opt.copyValue;
-		var currentPosition = opt.position;
+
+		// Capture the configuration options
+		var currentCopyValue     = opt.copyValue;
+		var currentPosition      = opt.position;
+		var currentNumberToClone = opt.numberToClone;
+		var currentDestination   = opt.destination;
+		var currentIds           = opt.ids;
+		var currentBtnRemoveText = opt.btnRemoveText;
+		
+
+		console.log(currentBtnClone);
 		/*===============================================
 		| When Clone button was clicked
 		|================================================*/
-		$(document).on('click', opt.btnClone, function(){
-			//console.log(p);
+		$(document).on('click', currentBtnClone, function(){
+			
 			// Store the destination of cloned element
 			var destinationClone;
 
 			// If destination provided, 
 			// then use user defined destination
-			if (opt.destination !== false){
+			if (currentDestination !== false){
 
 				// Use user defined destination
-				destinationClone = $(opt.destination);
+				destinationClone = $(currentDestination);
 
 				// Put either after or before depend
 				// on user defined position
 				if (currentPosition === "after"){
-					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, currentPosition);
+					loopCloneAppendPrepend(currentNumberToClone, element, destinationClone, currentPosition);
 					return;
 				} else {
-					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, currentPosition);
+					loopCloneAppendPrepend(currentNumberToClone, element, destinationClone, currentPosition);
 					return;
 				}
 
@@ -84,10 +122,10 @@
 				destinationClone = $(typeSelector);
 
 				if (currentPosition === "after"){					
-					loopCloneAfterBefore(opt.numberToClone, element, destinationClone.last(), currentPosition);
+					loopCloneAfterBefore(currentNumberToClone, element, destinationClone.last(), currentPosition);
 					return;
 				} else {					
-					loopCloneAfterBefore(opt.numberToClone, element, destinationClone.first(), currentPosition);
+					loopCloneAfterBefore(currentNumberToClone, element, destinationClone.first(), currentPosition);
 					return;
 				}
 			}
@@ -121,36 +159,37 @@
 			if (position === "after"){
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
-					destination.append(toClone.append('<input type="button" value="'+opt.btnRemoveText+'" class="metalBtnRemove">'));
+					destination.append(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
 					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 				}	
-				return;
+				
 			}
 			// If want to clone before
 			else if (position === "before"){
 
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
-					destination.prepend(toClone.append('<input type="button" value="'+opt.btnRemoveText+'" class="metalBtnRemove">'));
+					destination.prepend(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
 					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 				}
-				return;
+				
 			}
 			
 			// If the opt.ids is an empty array
 			// Is a default value
-			if($.isArray(opt.ids) && $.isEmptyObject(opt.ids)){
+			if($.isArray(currentIds) && $.isEmptyObject(currentIds)){
+				
 				// id will not increament
 				// do nothing
-				// console.log('ss');
+				
 			}
 			// If user provided element in array container
 			// Then call the function
 			// pass the opt.ids array value[* or a few]
-			else if ($.isArray(opt.ids) && !$.isEmptyObject(opt.ids)){
-
+			else if ($.isArray(currentIds) && !$.isEmptyObject(currentIds)){
+				
 				// call the function
-				idIncreament(opt.ids);
+				idIncreament(currentIds);
 			}
 			return;
 		}
@@ -182,13 +221,13 @@
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
 						toClone.insertAfter(destination)
-							   .append('<input type="button" value="'+opt.btnRemoveText+'" class="metalBtnRemove">');
+							   .append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">');
 
 					   if(currentCopyValue){ console.log('a');/* never copy */}else{clearForm(toClone);}
 						
 
 				}
-				return;
+				
 			}
 			// If want to clone before
 			else if (position === "before"){
@@ -197,27 +236,27 @@
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
 					toClone.insertBefore(destination)
-						   .append('<input type="button" value="'+opt.btnRemoveText+'" class="metalBtnRemove">');
+						   .append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">');
 
 					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 				}	
-				return;
+				
 			}
 
 			// If the opt.ids is an empty array
 			// Is a default value
-			if($.isArray(opt.ids) && $.isEmptyObject(opt.ids)){
+			if($.isArray(currentIds) && $.isEmptyObject(currentIds)){
 				// id will not increament
 				// do nothing
-				// console.log('ss');
+				
 			}
 			// If user provided element in array container
 			// Then call the function
 			// pass the opt.ids array value[* or a few]
-			else if ($.isArray(opt.ids) && !$.isEmptyObject(opt.ids)){
+			else if ($.isArray(currentIds) && !$.isEmptyObject(currentIds)){
 
 				// call the function
-				idIncreament(opt.ids);
+				idIncreament(currentIds);
 			}
 			
 			
@@ -226,7 +265,7 @@
 
 
 		function clearForm(container){
-			console.log('sdf');
+			
 			container.find('input:not("input[type=button], input[type=submit]"), textarea, select').each(function(){
 				$(this).val('');
 			})
@@ -312,10 +351,11 @@
 										// - i
 										// - strong
 										// - h1-h6
+										// * -> find all element inside container
 										// - ......
 										// ~~~~~ all HTML tag are availeble
 										
-		btnClone	: '.metalBtnClone',	// Put your selector(button class or id name) eg : .clickMe | #clickMe
+		btnClone	: null,	// Put your selector(button class or id name) eg : .clickMe | #clickMe
 		copyValue 	: false,			// Clone together the previous element value - available for form element only
 		btnRemoveText : 'Remove me',			// Text appear on remove button
 		btnCloneText : 'Create New Element'		// Text appear on clone button
