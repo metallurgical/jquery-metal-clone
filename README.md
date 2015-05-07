@@ -295,6 +295,9 @@ Configurations available for this plugin :
 		});
 ```
 
+# Demo Page #
+-	**[Click ME](https://metallurgical.github.io/metalClone "Jquery Metal Clone")**
+
 # Dependencies #
 -	Jquery Library either minified or development.
 
