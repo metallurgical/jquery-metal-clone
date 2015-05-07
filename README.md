@@ -95,33 +95,52 @@ Configurations available for this plugin :
 ```
 		
 		
-**2.	Example 2 - Using checkbox and select by element name.**
+**2. Example 2 - Clone element [immediate after last element] with value copied.**
 
 ``` html
 		<!-- **HTML** -->
-		<input type="checkbox" name="example2">
-    	<input type="checkbox" name="example2">
-    	<input type="checkbox" name="example2">
+		<div class="toClone_example2">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example2" value="Create New Copy">
+        </div>
 ```
 ``` javascript	
 		//**JS**
 		// This selector applied for checkbox with id name checkAll_example2
-		$('#checkAll_example2').metalCheckAll({
-			target : ['input[name=example2]']
+		$('.toClone_example2').metalClone({
+			btnClone 	: '.btn_example2',
+			copyValue 	: true
 		});
 ```
 
-**3.	Example 3 - Using checkbox and select by ID name.**
+**3.	Example 3 - Clone element [before first element] without value copied.**
 
 ``` html
 		<!-- **HTML** -->
-    	<input type="checkbox" name="example3" id="example3">
+    	<div class="toClone_example3">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example3" value="Create New Copy">
+        </div>
 ```
 ``` javascript	
 		//**JS**
 		// This selector applied for checkbox with id name checkAll_example3
-    	$('#checkAll_example3').metalCheckAll({
-			target : ['#example3']
+    	$('.toClone_example3').metalClone({
+			btnClone 	: '.btn_example3',
+			position	: 'before',
+			copyValue 	: false
 		});
 ```
 
@@ -129,18 +148,25 @@ Configurations available for this plugin :
 
 ``` html
 		<!-- **HTML** -->
-    	<input type="checkbox" class="example4">
-    	<input type="checkbox" class="example4">
-    	<input type="checkbox" class="example4">
+    	<div class="toClone_example4">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example4" value="Create New Copy">
+        </div>
 ```
 ``` javascript
 		//**JS**
 		// This selector applied for button with id name checkAll_example4
-    	$('#checkAll_example4').metalCheckAll({
-    		target : ['.example4'],
-    		btnValueChecked : 'Click ME', // Button Text before check
-    		btnValueUnChecked : 'UnCheck Me' // Button text after check
-    	});
+    	$('.toClone_example4').metalClone({
+			btnClone 	: '.btn_example4',
+			position	: 'before',
+			copyValue 	: true
+		});
 ```
 
 **5.	Example 5 - Using Button and select by input type checkbox(this will find all checkbox on page).**
