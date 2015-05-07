@@ -48,7 +48,8 @@
 		}
 
 //console.log(opt.copyValue);
-var currentCopyValue = opt.copyValue;
+		var currentCopyValue = opt.copyValue;
+		var currentPosition = opt.position;
 		/*===============================================
 		| When Clone button was clicked
 		|================================================*/
@@ -66,11 +67,11 @@ var currentCopyValue = opt.copyValue;
 
 				// Put either after or before depend
 				// on user defined position
-				if (opt.position === "after"){
-					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, opt.position);
+				if (currentPosition === "after"){
+					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, currentPosition);
 					return;
 				} else {
-					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, opt.position);
+					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, currentPosition);
 					return;
 				}
 
@@ -82,11 +83,11 @@ var currentCopyValue = opt.copyValue;
 
 				destinationClone = $(typeSelector);
 
-				if (opt.position === "after"){					
-					loopCloneAfterBefore(opt.numberToClone, element, destinationClone.last(), opt.position);
+				if (currentPosition === "after"){					
+					loopCloneAfterBefore(opt.numberToClone, element, destinationClone.last(), currentPosition);
 					return;
 				} else {					
-					loopCloneAfterBefore(opt.numberToClone, element, destinationClone.first(), opt.position);
+					loopCloneAfterBefore(opt.numberToClone, element, destinationClone.first(), currentPosition);
 					return;
 				}
 			}
