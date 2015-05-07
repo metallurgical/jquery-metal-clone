@@ -49,7 +49,7 @@ Configurations available for this plugin :
 2. **position	: 'after'** : Specified the position to place the cloned element. Only available for **before** and **after**.
 
 3. **numberToClone : 1** : Number of clone element want to clone(Integers only)
-4. **ids : []** : Any HTML tag element that have an ID to make these ID(s) unique.
+4. **ids : []** : Any HTML tag element that have an ID to make these ID(s) unique. Accept multiple value as array list. **eg : ['div','input']**
 	-	div
 	-	input
 	-	select
@@ -69,22 +69,29 @@ Configurations available for this plugin :
 # Basic Usage #
 
 
-**1. Example 1 - Using checkbox and select by class name.**
+**1. Example 1 - Clone element [immediate after last element] without copy the value.**
 
          
 		
 ``` html
-		<!-- **HTML** -->
-		<input type="checkbox" class="inputCheck">
-		<input type="checkbox" class="inputCheck">
-		<input type="checkbox" class="inputCheck">
+		<div class="toClone_example1">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example1" value="Create New Copy">
+        </div>
 ```
 ``` javascript	
 		//**JS**
 		// This selector applied for checkbox with id name checkAll_example1
-		$('#checkAll_example1').metalCheckAll({
-    		target : ['.inputCheck']
- 		});
+		$('.toClone_example1').metalClone({
+			btnClone 	: '.btn_example1',
+			copyValue 	: false
+		});
 ```
 		
 		
