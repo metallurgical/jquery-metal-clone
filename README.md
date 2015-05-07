@@ -87,7 +87,7 @@ Configurations available for this plugin :
 ```
 ``` javascript	
 		//**JS**
-		// This selector applied for checkbox with id name checkAll_example1
+		// This selector applied for element/container that want to clone
 		$('.toClone_example1').metalClone({
 			btnClone 	: '.btn_example1',
 			copyValue 	: false
@@ -112,7 +112,7 @@ Configurations available for this plugin :
 ```
 ``` javascript	
 		//**JS**
-		// This selector applied for checkbox with id name checkAll_example2
+		// This selector applied for element/container that want to clone
 		$('.toClone_example2').metalClone({
 			btnClone 	: '.btn_example2',
 			copyValue 	: true
@@ -136,7 +136,7 @@ Configurations available for this plugin :
 ```
 ``` javascript	
 		//**JS**
-		// This selector applied for checkbox with id name checkAll_example3
+		// This selector applied for element/container that want to clone
     	$('.toClone_example3').metalClone({
 			btnClone 	: '.btn_example3',
 			position	: 'before',
@@ -161,7 +161,7 @@ Configurations available for this plugin :
 ```
 ``` javascript
 		//**JS**
-		// This selector applied for button with id name checkAll_example4
+		// This selector applied for element/container that want to clone
     	$('.toClone_example4').metalClone({
 			btnClone 	: '.btn_example4',
 			position	: 'before',
@@ -169,53 +169,135 @@ Configurations available for this plugin :
 		});
 ```
 
-**5.	Example 5 - Using Button and select by input type checkbox(this will find all checkbox on page).**
+**5.	Example 5 - Clone element [immediate after last element] with specified the number of element to copy.**
 
 ``` html
 		<!-- **HTML** -->
-    	<input type="checkbox">
-    	<input type="checkbox">
-    	<input type="checkbox">	
+    	<div class="toClone_example5">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example5" value="Create New Copy">
+        </div>
 ```
 ``` javascript
 		//**JS**
-		// This selector applied for button with id name checkAll_example5
-    	$('#checkAll_example5').metalCheckAll({
-    		target : ['input[type=checkbox]'],
-    		btnValueChecked : 'Click ME', // Button Text before check
-    		btnValueUnChecked : 'UnCheck Me' // Button text after check
-    	});
+		// This selector applied for element/container that want to clone
+    	$('.toClone_example5').metalClone({
+			btnClone 		: '.btn_example5',
+			position		: 'after',
+			numberToClone 	: 5
+		});
 ```
 
 **6.	Example 6 - Using Button and select by multiple selector.**
 
 ``` html
 		<!-- **HTML** -->
-		<div class="container_body">
-			<input type="checkbox" name="a">
-			<input type="checkbox" name="a">
-			<input type="checkbox" name="a">			
+		<div class="toClone_example6">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
 		</div>
-		<div class="container_body">
-			<input type="checkbox" class="example6">
-			<input type="checkbox" class="example6">
-			<input type="checkbox" class="example6">			
-		</div>
-		<div class="container_body">
-			<input type="checkbox" id="example6">
-			<input type="checkbox" data-type="example6">
-			<input type="checkbox" data-type="example6">			
+		<div class="container_body">			
+        	<input type="button" class="btn_example6" value="Create New Copy">
+        </div>
+        <div class="toClone_example6_destination">
+			<span> Please place the newly cloned element here</span>
 		</div>
 ```
 ``` javascript
 		//**JS**
-		// This selector applied for button with id name #checkAll_example6 
-		$('#checkAll_example6').metalCheckAll({
-			target : ['input[name=a]','.example6','#example6','input[data-type="example6"]'], // arrays value
-			btnValueChecked : 'Click ME', // Button Text before check
-			btnValueUnChecked : 'UnCheck Me' // Button text after check
+		// This selector applied for element/container that want to clone 
+		$('.toClone_example6').metalClone({
+			btnClone 			: '.btn_example6',
+			position			: 'after',
+			numberToClone 		: 5,
+			destination 		: '.toClone_example6_destination'
+		});
+```
+
+**7.	Example 7 - Clone element [immediate after last element] with specified the number of element to copy and the destination to place the newly cloned element with unique ID(s).**
+
+``` html
+		<!-- **HTML** -->
+		<div class="toClone_example7">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+		<div class="container_body">			
+        	<input type="button" class="btn_example7" value="Create New Copy">
+        </div>
+        <div class="toClone_example7_destination">
+			<span> Please place the newly cloned element here</span>
+		</div>
+```
+``` javascript
+		//**JS**
+		// This selector applied for element/container that want to clone 
+		$('.toClone_example7').metalClone({
+			btnClone 			: '.btn_example7',
+			position			: 'after',
+			numberToClone 		: 5,
+			destination 		: '.toClone_example7_destination',
+			ids					: ['select']
+		});
+```
+
+**8.	Example 8 - Clone element [immediate after last element] without specified clone button(will create new one with name "Create New Element").**
+
+``` html
+		<!-- **HTML** -->
+		<div class="toClone_example8">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+```
+``` javascript
+		//**JS**
+		// This selector applied for element/container that want to clone 
+		$('.toClone_example8').metalClone({
+			position			: 'after'
+		});
+```
+
+**9.	Example 9 - Clone element [immediate after last element] with specified clone and remove button name.**
+
+``` html
+		<!-- **HTML** -->
+		<div class="toClone_example9">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+```
+``` javascript
+		//**JS**
+		// This selector applied for element/container that want to clone 
+		$('.toClone_example9').metalClone({
+			position			: 'after',
+			btnRemoveText		: 'Please delete me from this',
+			btnCloneText		: 'Wow, make another copy'
 		});
 ```
 
 # Dependencies #
 -	Jquery Library either minified or development.
+
+# Support #
+-	norlihazmey89@gmail.com
+-	If you found a bug or something technical problem, please create an issues.
