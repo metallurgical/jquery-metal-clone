@@ -41,18 +41,19 @@
 			$('<input/>',{
 
 				type : 'button',
-				value : 'Create New Element',
+				value : opt.btnCloneText,
 				class : 'btnClone'
 
 			}).insertAfter(typeSelector);
 		}
 
-
+//console.log(opt.copyValue);
+var currentCopyValue = opt.copyValue;
 		/*===============================================
 		| When Clone button was clicked
 		|================================================*/
 		$(document).on('click', opt.btnClone, function(){
-
+			//console.log(p);
 			// Store the destination of cloned element
 			var destinationClone;
 
@@ -67,8 +68,10 @@
 				// on user defined position
 				if (opt.position === "after"){
 					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, opt.position);
+					return;
 				} else {
 					loopCloneAppendPrepend(opt.numberToClone, element, destinationClone, opt.position);
+					return;
 				}
 
 			} 
@@ -81,12 +84,14 @@
 
 				if (opt.position === "after"){					
 					loopCloneAfterBefore(opt.numberToClone, element, destinationClone.last(), opt.position);
+					return;
 				} else {					
 					loopCloneAfterBefore(opt.numberToClone, element, destinationClone.first(), opt.position);
+					return;
 				}
 			}
 
-			
+			return;
 
 			
 
@@ -115,18 +120,20 @@
 			if (position === "after"){
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
-					destination.append(toClone.append('<input type="button" value="remove" class="metalBtnRemove">'));
-					if(opt.copyValue){ /* never copy */}else{clearForm(toClone);}
+					destination.append(toClone.append('<input type="button" value="'+opt.btnRemoveText+'" class="metalBtnRemove">'));
+					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 				}	
+				return;
 			}
 			// If want to clone before
 			else if (position === "before"){
 
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
-					destination.prepend(toClone.append('<input type="button" value="remove" class="metalBtnRemove">'));
-					if(opt.copyValue){ /* never copy */}else{clearForm(toClone);}
+					destination.prepend(toClone.append('<input type="button" value="'+opt.btnRemoveText+'" class="metalBtnRemove">'));
+					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 				}
+				return;
 			}
 			
 			// If the opt.ids is an empty array
@@ -174,12 +181,13 @@
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
 						toClone.insertAfter(destination)
-							   .append('<input type="button" value="remove" class="metalBtnRemove">');
+							   .append('<input type="button" value="'+opt.btnRemoveText+'" class="metalBtnRemove">');
 
-					   if(opt.copyValue){ /* never copy */}else{clearForm(toClone);}
+					   if(currentCopyValue){ console.log('a');/* never copy */}else{clearForm(toClone);}
 						
 
 				}
+				return;
 			}
 			// If want to clone before
 			else if (position === "before"){
@@ -188,10 +196,11 @@
 				for(var i = 0; i < numberToClone; i++){
 					var toClone = cloneObj.clone();
 					toClone.insertBefore(destination)
-						   .append('<input type="button" value="remove" class="metalBtnRemove">');
+						   .append('<input type="button" value="'+opt.btnRemoveText+'" class="metalBtnRemove">');
 
-					if(opt.copyValue){ /* never copy */}else{clearForm(toClone);}
+					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 				}	
+				return;
 			}
 
 			// If the opt.ids is an empty array
@@ -216,7 +225,7 @@
 
 
 		function clearForm(container){
-
+			console.log('sdf');
 			container.find('input:not("input[type=button], input[type=submit]"), textarea, select').each(function(){
 				$(this).val('');
 			})
@@ -257,9 +266,10 @@
 					if($(this).attr('id')){
 						// Get the original value
 						var oldValue = $(this).attr('id');
+						var newValue = oldValue.replace(/\d+/g, '');
 						//var increValue = 
 						// Set the new id(s) value
-						$(this).attr('id',oldValue + parseInt(inc));
+						$(this).attr('id',newValue + parseInt(inc));
 					}
 				});
 			
@@ -280,12 +290,7 @@
 
 			var $elem = $(this);
 
-			/*if($.isFunction(options.onStart)){
-
-				options.onStart.call(this);
-			}
-
-			$.isFunction(callback) && callback();*/
+			
 		})
 		
 	};
@@ -310,7 +315,9 @@
 										// ~~~~~ all HTML tag are availeble
 										
 		btnClone	: '.metalBtnClone',	// Put your selector(button class or id name) eg : .clickMe | #clickMe
-		copyValue 	: false				// Clone together the previous element value - available for form element only
+		copyValue 	: false,			// Clone together the previous element value - available for form element only
+		btnRemoveText : 'Remove me',			// Text appear on remove button
+		btnCloneText : 'Create New Element'		// Text appear on clone button
 
 		// Please wait for callback option.. coming soon..
 
