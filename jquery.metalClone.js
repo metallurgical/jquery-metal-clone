@@ -87,7 +87,7 @@
 		var currentBtnRemoveText = opt.btnRemoveText;
 		
 
-		console.log(currentBtnClone);
+		//console.log(currentBtnClone);
 		/*===============================================
 		| When Clone button was clicked
 		|================================================*/
@@ -134,7 +134,7 @@
 
 			
 
-		})
+		});
 
 		/*===============================================
 		| Function to clone element(IF destination provided)
@@ -223,7 +223,7 @@
 						toClone.insertAfter(destination)
 							   .append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">');
 
-					   if(currentCopyValue){ console.log('a');/* never copy */}else{clearForm(toClone);}
+					   if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 						
 
 				}
@@ -268,7 +268,7 @@
 			
 			container.find('input:not("input[type=button], input[type=submit]"), textarea, select').each(function(){
 				$(this).val('');
-			})
+			});
 		}
 
 
@@ -323,7 +323,7 @@
 			// Get the parent container
 			// Then remove including child
 			$(this).closest(typeSelector).remove();
-		})
+		});
 		
 
 		return element.each(function(i,e){
@@ -331,7 +331,7 @@
 			var $elem = $(this);
 
 			
-		})
+		});
 		
 	};
 

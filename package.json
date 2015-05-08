@@ -1,0 +1,20 @@
+{
+  "name": "metalClone",
+  "version": "1.0.1",
+  "description": "jQuery plugin clone DOM element",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-jshint": "^1.9.0",
+    "gulp-uglify": "^1.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "hello"
+  ],
+  "author": "norlihazmey@metallurgical",
+  "license": "MIT"
+}
