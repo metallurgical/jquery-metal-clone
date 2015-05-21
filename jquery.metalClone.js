@@ -102,7 +102,7 @@
 			
 			// if selector is a table and destination not table
 			if(($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)){
-				//console.log('a');
+				
 				$('<input/>',{
 
 					type : 'button',
@@ -116,7 +116,7 @@
 			}
 			// if selector is a table element and destination is a table
 			else if(($.inArray(nodeType, allNodeTableWithout) !== -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)){
-				//console.log('b');
+				
 				$('<input/>',{
 
 					type : 'button',
@@ -130,7 +130,7 @@
 			}
 			// if a selector is not a table && destination not a table
 			else if(($.inArray(nodeType, allNodeTableWithout) == -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)){
-				//console.log('c');
+				
 				$('<input/>',{
 
 					type : 'button',
@@ -144,7 +144,7 @@
 			}
 			// if selector is not a table element and destination is a table
 			else if(($.inArray(nodeType, allNodeTableWithout) == -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)){
-				//console.log('d');
+				
 				$('<input/>',{
 
 					type : 'button',
@@ -194,10 +194,7 @@
 		| When Clone button was clicked
 		|================================================*/
 		$(document).on('click', currentBtnClone, function(){
-			//$(typeSelector).off();
-			// Remove operation block at initial start
-			//$('.operations').hide();
-
+			
 			// Store the destination of cloned element
 			var destinationClone;
 
@@ -224,7 +221,7 @@
 			// after/before cloned element
 			else {
 
-				//$(currentBtnClone).trigger('click.createTdTable');
+				
 
 				destinationClone = $(typeSelector);
 
@@ -237,7 +234,7 @@
 				}
 			}
 
-			//$('.operations').hide();
+			
 			return;
 
 			
@@ -410,7 +407,7 @@
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 					}
 					
-					//$(currentBtnClone).focus();
+					
 				}
 				// selection is not a table
 				if(($.inArray(nodeType, allNodeTableWithout) == -1)){
@@ -433,7 +430,7 @@
 				// Clone element[insert before]
 				// If table tr to clone
 				if(($.inArray(nodeType, allNodeTableWithout) !== -1)){
-					//console.log('bind here');
+					
 					for(var i = 0; i < numberToClone; i++){
 						var toClone = cloneObj.clone();
 							toClone.insertBefore(destination);
@@ -441,7 +438,7 @@
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 					}
 					
-					//$(currentBtnClone).focus();
+					
 				}
 				else{
 					for(var i = 0; i < numberToClone; i++){
