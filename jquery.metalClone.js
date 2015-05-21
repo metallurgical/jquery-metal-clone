@@ -29,6 +29,29 @@
 		// Get the selector
 		// To see either class or ids were used
 		var typeSelector = this.selector;
+		var nodeType = this[0].nodeName;
+		// Capture the configuration options
+		var currentCopyValue     = opt.copyValue;
+		var currentPosition      = opt.position;
+		var currentNumberToClone = opt.numberToClone;
+		var currentDestination   = opt.destination;
+		var currentIds           = opt.ids;
+		var currentBtnRemoveText = opt.btnRemoveText;
+		var destinationNodeType = (currentDestination) ? $(currentDestination)[0].nodeName : 'none';
+		
+
+		// Table list(match with selection)
+		var allNodeTableWithout = [
+								'TABLE',
+								'TR',
+								'TD',
+								'TBODY',
+								'TFOOT',
+								'THEAD',
+								'TH'
+							  ];
+
+			
 		var element;
 		
 
@@ -42,6 +65,21 @@
 		    	// return  its object
 		    	element = $(this);
 		    }
+
+
+
+		/*=================== parent[table] ===================*/
+		var tdCloseParent;
+		var firstTdChild;
+		
+		// only for table
+		if($.inArray(nodeType, allNodeTableWithout) !== -1){
+
+			tdCloseParent = element.closest('table');
+			firstTdChild = tdCloseParent.find('tr').first();
+			
+
+		}
 
 		
 		/*===============================================
@@ -59,13 +97,65 @@
 		if (opt.btnClone === null) {
 			// create new clone button with unique id
 			currentBtnClone = "metalBtnClone"+Math.floor(Math.random()*9+1);
-			$('<input/>',{
+			//console.log(typeSelector);
+			
+			
+			// if selector is a table and destination not table
+			if(($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)){
+				//console.log('a');
+				$('<input/>',{
 
-				type : 'button',
-				value : opt.btnCloneText,
-				class : currentBtnClone
+					type : 'button',
+					value : opt.btnCloneText,
+					class : currentBtnClone,
+					css : {
+						marginTop : '10px'
+					}
 
-			}).insertAfter(typeSelector);
+				}).insertAfter(tdCloseParent);
+			}
+			// if selector is a table element and destination is a table
+			else if(($.inArray(nodeType, allNodeTableWithout) !== -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)){
+				//console.log('b');
+				$('<input/>',{
+
+					type : 'button',
+					value : opt.btnCloneText,
+					class : currentBtnClone,
+					css : {
+						marginTop : '10px'
+					}
+
+				}).insertAfter(tdCloseParent);
+			}
+			// if a selector is not a table && destination not a table
+			else if(($.inArray(nodeType, allNodeTableWithout) == -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)){
+				//console.log('c');
+				$('<input/>',{
+
+					type : 'button',
+					value : opt.btnCloneText,
+					class : currentBtnClone,
+					css : {
+						marginTop : '10px'
+					}
+
+				}).insertAfter(typeSelector);
+			}
+			// if selector is not a table element and destination is a table
+			else if(($.inArray(nodeType, allNodeTableWithout) == -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)){
+				//console.log('d');
+				$('<input/>',{
+
+					type : 'button',
+					value : opt.btnCloneText,
+					class : currentBtnClone,
+					css : {
+						marginTop : '10px'
+					}
+
+				}).insertAfter(typeSelector);
+			}
 
 			// Concat the . sysmbol at beggining of 
 			// class name for dynamic create button
@@ -78,21 +168,33 @@
 		}
 
 
-		// Capture the configuration options
-		var currentCopyValue     = opt.copyValue;
-		var currentPosition      = opt.position;
-		var currentNumberToClone = opt.numberToClone;
-		var currentDestination   = opt.destination;
-		var currentIds           = opt.ids;
-		var currentBtnRemoveText = opt.btnRemoveText;
+		
+		$(document).on({
+
+			mouseenter : function(){
+				
+					$(this).find('.operations').css({
+						display : 'block'
+					});
+				
+			},
+			mouseleave : function(){
+				$(this).find('.operations').css({
+					display : 'none'
+				});
+			}
+
+		},typeSelector);
 		
 
-		//console.log(currentBtnClone);
 		/*===============================================
 		| When Clone button was clicked
 		|================================================*/
 		$(document).on('click', currentBtnClone, function(){
-			
+
+			// Remove operation block at initial start
+			$('.operations').hide();
+
 			// Store the destination of cloned element
 			var destinationClone;
 
@@ -118,6 +220,8 @@
 			// If did't provied,just clone element 
 			// after/before cloned element
 			else {
+
+				//$(currentBtnClone).trigger('click.createTdTable');
 
 				destinationClone = $(typeSelector);
 
@@ -147,31 +251,105 @@
 		|
 		|===============================================*/
 		function loopCloneAppendPrepend(numberToClone, elementClone, destination, position){
-
+			
 			// Cache the clone obj
 			var cloneObj = elementClone; 
 			// If user put 0,
 			// Then assign 1 as a default value
 			// else use the provided value
-			numberToClone = (numberToClone == 0) ? 1 : numberToClone;  
+			numberToClone = (numberToClone == 0) ? 1 : numberToClone;  			
 
 			// If want to clone after
 			if (position === "after"){
-				for(var i = 0; i < numberToClone; i++){
-					var toClone = cloneObj.clone();
-					destination.append(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
-					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
-				}	
+
+				// table element but destination only table
+				// if selection is a table && destination a table
+				if(($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)){
+
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+							toClone.insertAfter(destination.find('tr').last());
+							toClone.find('td').last().append('<div class="operations"><img src="images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}
+
+				}
+				// table element but destination not table element
+				// if selection is a table && destination not a table
+				else if(($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)){
+					
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+						destination.append(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}	
+				}
+				// not table element and destination not table element
+				// if selection is not a table && destination not a table element
+				else if(($.inArray(nodeType, allNodeTableWithout) == -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)){
+					
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+						destination.append(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}	
+				}
+				//if selection is not a table && destination is a table
+				else if(($.inArray(nodeType, allNodeTableWithout) == -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)){
+
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+							destination.append(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}
+
+				}
+
 				
 			}
 			// If want to clone before
 			else if (position === "before"){
 
-				for(var i = 0; i < numberToClone; i++){
-					var toClone = cloneObj.clone();
-					destination.prepend(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
-					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+				// table element but destination only table
+				if(($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)){
+
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+							toClone.insertAfter(destination.find('tr').first());
+							toClone.find('td').last().append('<div class="operations"><img src="images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}
+
 				}
+				// table element but destination not table element
+				else if(($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)){
+					
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+						destination.prepend(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}	
+				}
+				// not table element and destination not table element
+				else if(($.inArray(nodeType, allNodeTableWithout) == -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)){
+					
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+						destination.prepend(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}	
+				}
+				//if selection is not a table && destination is a table
+				else if(($.inArray(nodeType, allNodeTableWithout) == -1 ) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)){
+					
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+							destination.prepend(toClone.append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">'));
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}
+				}
+
+				
 				
 			}
 			
@@ -216,16 +394,32 @@
 
 			// If want to clone after
 			if (position === "after"){
-
+				
 				// Clone element[insert after the clone element]
-				for(var i = 0; i < numberToClone; i++){
-					var toClone = cloneObj.clone();
-						toClone.insertAfter(destination)
-							   .append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">');
+				// selection is a table
+				if(($.inArray(nodeType, allNodeTableWithout) !== -1)){
+					
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+							toClone.insertAfter(destination);
+							toClone.find('td').last().append('<div class="operations"><img src="images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}
+					
+					//$(currentBtnClone).focus();
+				}
+				// selection is not a table
+				if(($.inArray(nodeType, allNodeTableWithout) == -1)){
+					
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+							toClone.insertAfter(destination)
+								   .append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">');
 
-					   if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
-						
+						   if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+							
 
+					}
 				}
 				
 			}
@@ -233,13 +427,27 @@
 			else if (position === "before"){
 
 				// Clone element[insert before]
-				for(var i = 0; i < numberToClone; i++){
-					var toClone = cloneObj.clone();
-					toClone.insertBefore(destination)
-						   .append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">');
+				// If table tr to clone
+				if(($.inArray(nodeType, allNodeTableWithout) !== -1)){
+					//console.log('bind here');
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+							toClone.insertBefore(destination);
+							toClone.find('td').last().append('<div class="operations"><img src="images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}
+					
+					//$(currentBtnClone).focus();
+				}
+				else{
+					for(var i = 0; i < numberToClone; i++){
+						var toClone = cloneObj.clone();
+						toClone.insertBefore(destination)
+							   .append('<input type="button" value="'+currentBtnRemoveText+'" class="metalBtnRemove">');
 
-					if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
-				}	
+						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
+					}	
+				}
 				
 			}
 
