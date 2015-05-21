@@ -168,32 +168,35 @@
 		}
 
 
-		
-		$(document).on({
+		//$(document).on('mousemove', function(){
+			$(document).on({
 
-			mouseenter : function(){
-				
+				mouseenter : function(){
+					
+						$(this).find('.operations').css({
+							display : 'block'
+						});
+					
+				},
+				mouseleave : function(){
 					$(this).find('.operations').css({
-						display : 'block'
+						display : 'none'
 					});
-				
-			},
-			mouseleave : function(){
-				$(this).find('.operations').css({
-					display : 'none'
-				});
-			}
+				}
 
-		},typeSelector);
+			},typeSelector);
+		//})
+
+		
 		
 
 		/*===============================================
 		| When Clone button was clicked
 		|================================================*/
 		$(document).on('click', currentBtnClone, function(){
-
+			//$(typeSelector).off();
 			// Remove operation block at initial start
-			$('.operations').hide();
+			//$('.operations').hide();
 
 			// Store the destination of cloned element
 			var destinationClone;
@@ -234,6 +237,7 @@
 				}
 			}
 
+			//$('.operations').hide();
 			return;
 
 			
