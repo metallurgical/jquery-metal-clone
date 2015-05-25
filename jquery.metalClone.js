@@ -18,7 +18,21 @@
 	$.fn.metalClone = function(options , callback){
 
 		opt = $.extend({}, $.fn.metalClone.defaults, options);
+		var scriptPath = function () {
+	    var scripts = document.getElementsByTagName('SCRIPT');
+	    var path = '';
+	    if(scripts && scripts.length>0) {
+	        for(var i in scripts) {
+	            if(scripts[i].src && scripts[i].src.match(/\/jquery.metalClone\.js$/)) {
+	                path = scripts[i].src.replace(/(.*)\/jquery.metalClone\.js$/, '$1');
+	                break;
+	            }
+	        }
+	    }
+	    	return path;
+		};
 
+		//console.log(scriptPath());
 		/*if($.isFunction(options)){
 
 			callback = options;
@@ -270,7 +284,7 @@
 					for(var i = 0; i < numberToClone; i++){
 						var toClone = cloneObj.clone();
 							toClone.insertAfter(destination.find('tr').last());
-							toClone.find('td').last().append('<div class="operations"><img src="images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+							toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 					}
 
@@ -317,7 +331,7 @@
 					for(var i = 0; i < numberToClone; i++){
 						var toClone = cloneObj.clone();
 							toClone.insertAfter(destination.find('tr').first());
-							toClone.find('td').last().append('<div class="operations"><img src="images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+							toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 					}
 
@@ -403,7 +417,7 @@
 					for(var i = 0; i < numberToClone; i++){
 						var toClone = cloneObj.clone();
 							toClone.insertAfter(destination);
-							toClone.find('td').last().append('<div class="operations"><img src="images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+							toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 					}
 					
@@ -434,7 +448,7 @@
 					for(var i = 0; i < numberToClone; i++){
 						var toClone = cloneObj.clone();
 							toClone.insertBefore(destination);
-							toClone.find('td').last().append('<div class="operations"><img src="images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+							toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 					}
 					
