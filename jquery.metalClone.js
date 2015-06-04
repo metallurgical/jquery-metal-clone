@@ -96,7 +96,7 @@
 		if (opt.btnClone === null) {
 			// create new clone button with unique id
 			currentBtnClone = "metalBtnClone"+Math.floor(Math.random()*99999999999+1);
-			//console.log(typeSelector);
+			
 			
 			
 			// if selector is a table and destination not table
@@ -616,7 +616,7 @@
 			// then just use the default value
 			// default value is infinity
 			else {
-				//return console.log('Debug : no limit');
+				
 				return 'no limit';
 			}
 			
@@ -648,7 +648,7 @@
 			// return to true
 			if ( !flagLimit ) {
 				console.log('Number to clone more than limit');
-			    //return;
+			    
 			    flagProceed = true;
 			}
 			// if no limit, then assign 0 value as a default
