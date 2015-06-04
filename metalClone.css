@@ -19,3 +19,9 @@
 .operationsImg{
 	cursor: pointer;
 }
+
+span.error_limit{
+	margin:10px 0;
+	display:block;
+	color : #D24625;
+}

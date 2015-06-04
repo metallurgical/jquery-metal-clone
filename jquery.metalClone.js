@@ -613,6 +613,17 @@
 			
 		}
 
+		function getSelectorName() {
+
+			var name;
+			if ( flagClass )
+				name = typeSelector.replace('.', '');
+			else 
+				name = typeSelector.replace('#', '');
+
+			return name;
+		}
+
 
 		// check the cloned element meet the condition or not
 		function limitHandler() {
@@ -640,8 +651,22 @@
 			// if cloned element already exceed limit provided
 			// stop current process
 			if ( canProceed  > cloneLimit ) {
-				console.log("Can't clone more than limit provided") 
-				//return;
+				console.log("Can't clone more than limit provided")
+				if ( $(currentBtnClone).next().is('span') ) {
+					$(currentBtnClone).next().html('Clone limit reached');
+				} else {
+					// call function to get selector name
+					// without .(class) or #(id) symbols
+					var selectorName = getSelectorName();
+					// create span element for error_limit message
+					// after clone button
+					$('<span/>',{
+						'data-clone-reference' : selectorName,
+						class : 'error_limit',
+						text : 'Clone limit reached'
+					}).insertAfter(currentBtnClone);
+				}
+				//.after('<span')
 				flagProceed = true;
 			}
 
@@ -654,9 +679,15 @@
 		| When Remove button was clicked
 		|================================================*/
 		$(document).on('click', '.metalBtnRemove', function(){
+			// call function to get selector name
+			// without .(class) or #(id) symbols
+			var selectorName = getSelectorName();
 			// Get the parent container
 			// Then remove including child
 			$(this).closest(typeSelector).remove();
+			// remove error_limit message after remove 
+			// current deleted element
+			$('body').find('[data-clone-reference="'+selectorName+'"]').remove();
 		});
 		
 
