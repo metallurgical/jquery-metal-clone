@@ -67,7 +67,7 @@ Configurations available for this plugin :
 6.	**copyValue 	: false** : Deep copy include value or empty. Available option is **true** and **false**.
 7.	**btnRemoveText : 'Remove me'** : Text appeared on remove button.
 8.	**btnCloneText : 'Create New Element'** : Text appeared on clone button.
-9.	**cloneLimit** : 'infinity' : Accept integer number only. This option limit the number of cloned element. After reach the value provided, user no longer can clone element unless remove cloned element.
+9.	**cloneLimit** : **'infinity'** : Accept integer number only. This option limit the number of cloned element. After reach the value provided, user no longer can clone element unless remove cloned element.
 
 # Basic Usage #
 

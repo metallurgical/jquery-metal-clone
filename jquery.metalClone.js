@@ -629,8 +629,7 @@
 				name = typeSelector.replace('.', '');
 			else 
 				name = typeSelector.replace('#', '');
-
-			console.log(name);
+			
 			return name;
 		}
 
