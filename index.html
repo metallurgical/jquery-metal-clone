@@ -3,6 +3,7 @@
 		<head>
 			<title>Example 1</title>
 			<link href="codeHighlighter/prism.css" rel="stylesheet">
+			<link href="metalClone.css" rel="stylesheet">
 			<script src="jquery.min.js"></script>
 			<script src="codeHighlighter/prism.js"></script>
 			<script src="jquery.metalClone.min.js"></script>
@@ -467,6 +468,147 @@ $('.toClone_example9').metalClone({
 	</div>
 
 
+
+	<div class="container">
+	<span><strong>Example 10 - Clone element with limit element to clone.</strong></span>
+		<br/>
+		<div class="toClone_example10">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example10">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example10').metalClone({
+	cloneLimit : 3
+});
+</code>
+</pre>		
+</div>	
+	</div>
+
+
+
+		<div class="container">
+	<span><strong>Example 11 - Clone element with limit element to clone and number of element to clone[must be noted that, the limit specified must be higher than number of element to clone.</strong></span>
+		<br/>
+		<div class="toClone_example11">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<div class="toClone_example11">
+	<input type="text">
+	<select id="m">
+		<option value="">--Please Select</option>
+		<option value="Hello">Hello</option>
+	</select>
+</div>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example11').metalClone({
+	cloneLimit : 3,
+	numberToClone : 2
+});
+</code>
+</pre>		
+</div>	
+	</div>
+
+
+
+
+			<div class="container">
+	<span><strong>Example 12 - Event work with table TR clone.</strong></span>
+		<br/>
+		<div id="toClone_example12">
+			<table border="1">
+				<tr>
+					<td>No.</td>
+					<td>Name</td>
+					<td>Ic</td>
+					<td>Gender</td>
+				</tr>
+				<tr>
+					<td>a</td>
+					<td>b</td>
+					<td>c</td>
+					<td>d</td>
+				</tr>
+				<tr class="toClone_example12">
+					<td><input type="text" size="5" id="kk"/></td>
+					<td><input type="text" size="5"/></td>
+					<td><input type="text" size="5"/></td>
+					<td><input type="text" size="5"/></td>
+				</tr>
+			</table>
+		</div>
+<div class="container_body">
+<pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+HTML
+<table border="1">
+	<tr>
+		<td>No.</td>
+		<td>Name</td>
+		<td>Ic</td>
+		<td>Gender</td>
+	</tr>
+	<tr>
+		<td>a</td>
+		<td>b</td>
+		<td>c</td>
+		<td>d</td>
+	</tr>
+	<tr class="toClone_example12">
+		<td><input type="text" size="5" id="kk"/></td>
+		<td><input type="text" size="5"/></td>
+		<td><input type="text" size="5"/></td>
+		<td><input type="text" size="5"/></td>
+	</tr>
+</table>
+</script>
+</code>
+
+<code class="language-javascript">
+jQuery
+$('.toClone_example12').metalClone({
+	cloneLimit : 3
+});
+</code>
+</pre>		
+</div>	
+	</div>
+
+
 	<script>
 	$(function(){
 
@@ -530,6 +672,24 @@ $('.toClone_example9').metalClone({
 			position			: 'after',
 			btnRemoveText		: 'Please delete me from this',
 			btnCloneText		: 'Wow, make another copy'
+		});
+
+		// Example 10
+		$('.toClone_example10').metalClone({
+			cloneLimit : 3
+		});
+
+		// Example 11
+		$('.toClone_example11').metalClone({
+			cloneLimit : 3,
+			numberToClone : 2 
+
+		});
+
+		// Example 12
+		$('.toClone_example12').metalClone({
+			cloneLimit : 3
+
 		});
 
 		

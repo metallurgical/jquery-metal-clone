@@ -14,6 +14,8 @@ Simple plugin to clone DOM element.
 - Specified position cloned element.
 - Clone the element as many as you want.
 - With unique ID(s) auto increment.
+- Clone table rows even column also.
+- Limit the number of cloned element into specified value.
 
 
 
@@ -65,6 +67,7 @@ Configurations available for this plugin :
 6.	**copyValue 	: false** : Deep copy include value or empty. Available option is **true** and **false**.
 7.	**btnRemoveText : 'Remove me'** : Text appeared on remove button.
 8.	**btnCloneText : 'Create New Element'** : Text appeared on clone button.
+9.	**cloneLimit** : 'infinity' : Accept integer number only. This option limit the number of cloned element. After reach the value provided, user no longer can clone element unless remove cloned element.
 
 # Basic Usage #
 
@@ -292,6 +295,82 @@ Configurations available for this plugin :
 			position			: 'after',
 			btnRemoveText		: 'Please delete me from this',
 			btnCloneText		: 'Wow, make another copy'
+		});
+```
+
+**10.	Example 10 - Clone element with limit element to clone.**
+
+``` html
+		<!-- **HTML** -->
+		<div class="toClone_example10">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+```
+``` javascript
+		//**JS**
+		// This selector applied for element/container that want to clone 
+		$('.toClone_example10').metalClone({
+			cloneLimit : 3
+		});
+```
+
+**11.	Example 11 - Clone element with limit element to clone and number of element to clone[must be noted that, the limit specified must be higher than number of element to clone.**
+
+``` html
+		<!-- **HTML** -->
+		<div class="toClone_example11">
+			<input type="text">
+			<select id="m">
+				<option value="">--Please Select</option>
+				<option value="Hello">Hello</option>
+			</select>
+		</div>
+```
+``` javascript
+		//**JS**
+		// This selector applied for element/container that want to clone 
+		$('.toClone_example11').metalClone({
+			cloneLimit : 3,
+			numberToClone : 2
+		});
+```
+
+**12.	Example 11 - Event work with table rows and column to clone.**
+
+``` html
+		<!-- **HTML** -->
+		<div class="toClone_example12">
+			<table border="1">
+				<tr>
+					<td>No.</td>
+					<td>Name</td>
+					<td>Ic</td>
+					<td>Gender</td>
+				</tr>
+				<tr>
+					<td>a</td>
+					<td>b</td>
+					<td>c</td>
+					<td>d</td>
+				</tr>
+				<tr class="toClone_example12">
+					<td><input type="text" size="5" id="kk"/></td>
+					<td><input type="text" size="5"/></td>
+					<td><input type="text" size="5"/></td>
+					<td><input type="text" size="5"/></td>
+				</tr>
+			</table>
+		</div>
+```
+``` javascript
+		//**JS**
+		// This selector applied for element/container that want to clone 
+		$('.toClone_example12').metalClone({
+			cloneLimit : 3
 		});
 ```
 

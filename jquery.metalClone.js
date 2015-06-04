@@ -17,20 +17,8 @@
 
 	$.fn.metalClone = function(options , callback){
 
+		
 		opt = $.extend({}, $.fn.metalClone.defaults, options);
-		var scriptPath = function () {
-	    var scripts = document.getElementsByTagName('SCRIPT');
-	    var path = '';
-	    if(scripts && scripts.length>0) {
-	        for(var i in scripts) {
-	            if(scripts[i].src && scripts[i].src.match(/\/jquery.metalClone\.js$/)) {
-	                path = scripts[i].src.replace(/(.*)\/jquery.metalClone\.js$/, '$1');
-	                break;
-	            }
-	        }
-	    }
-	    	return path;
-		};
 
 		
 		// Get the selector
@@ -45,8 +33,8 @@
 		var currentDestination   = opt.destination;
 		var currentIds           = opt.ids;
 		var currentBtnRemoveText = opt.btnRemoveText;
-		var destinationNodeType = (currentDestination) ? $(currentDestination)[0].nodeName : 'none';
-		var cloneLimit			= opt.cloneLimit;
+		var destinationNodeType  = (currentDestination) ? $(currentDestination)[0].nodeName : 'none';
+		var cloneLimit           = opt.cloneLimit;
 		
 
 		// Table list(match with selection)
@@ -107,7 +95,7 @@
 		// then make new one
 		if (opt.btnClone === null) {
 			// create new clone button with unique id
-			currentBtnClone = "metalBtnClone"+Math.floor(Math.random()*9+1);
+			currentBtnClone = "metalBtnClone"+Math.floor(Math.random()*99999999999+1);
 			//console.log(typeSelector);
 			
 			
@@ -248,9 +236,30 @@
 			
 			return;
 
-			
 
 		});
+
+
+		function scriptPath() {
+		    var scripts = $('script');
+		    var path = '';
+		    if(scripts && scripts.length>0) {
+		        for(var i in scripts) {
+		            
+		            var regex = /jquery.metalClone*/g;
+		            var regexRep = /jquery.metalClone.js|jquery.metalClone.min.js/g;
+		            
+		            if(scripts[i].src && scripts[i].src.match(regex)) {
+		            	
+		               path = scripts[i].src.replace(regexRep, '');		              
+		               break;
+		            }
+		        }
+		    }
+	    	return path;
+		};
+
+		
 
 		/*===============================================
 		| Function to clone element(IF destination provided)
@@ -621,6 +630,7 @@
 			else 
 				name = typeSelector.replace('#', '');
 
+			console.log(name);
 			return name;
 		}
 
@@ -724,7 +734,7 @@
 		copyValue 	: false,			// Clone together the previous element value - available for form element only
 		btnRemoveText : 'Remove me',			// Text appear on remove button
 		btnCloneText : 'Create New Element',	// Text appear on clone button
-		cloneLimit   : 'infinity'
+		cloneLimit   : 'infinity' // limit the element that want to clone
 
 		// Please wait for callback option.. coming soon..
 
