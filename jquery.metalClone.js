@@ -35,6 +35,7 @@
 		var currentBtnRemoveText = opt.btnRemoveText;
 		var destinationNodeType  = (currentDestination) ? $(currentDestination)[0].nodeName : 'none';
 		var cloneLimit           = opt.cloneLimit;
+		var cloneLimitText 		 = opt.cloneLimitText; 
 		
 
 		// Table list(match with selection)
@@ -662,7 +663,7 @@
 			if ( canProceed  > cloneLimit ) {
 				console.log("Can't clone more than limit provided")
 				if ( $(currentBtnClone).next().is('span') ) {
-					$(currentBtnClone).next().html('Clone limit reached');
+					$(currentBtnClone).next().html(cloneLimitText);
 				} else {
 					// call function to get selector name
 					// without .(class) or #(id) symbols
@@ -672,7 +673,7 @@
 					$('<span/>',{
 						'data-clone-reference' : selectorName,
 						class : 'error_limit',
-						text : 'Clone limit reached'
+						text : cloneLimitText
 					}).insertAfter(currentBtnClone);
 				}
 				//.after('<span')
@@ -733,7 +734,8 @@
 		copyValue 	: false,			// Clone together the previous element value - available for form element only
 		btnRemoveText : 'Remove me',			// Text appear on remove button
 		btnCloneText : 'Create New Element',	// Text appear on clone button
-		cloneLimit   : 'infinity' // limit the element that want to clone
+		cloneLimit   : 'infinity', // limit the element that want to clone,
+		cloneLimitText : 'Clone limit reached'
 
 		// Please wait for callback option.. coming soon..
 
