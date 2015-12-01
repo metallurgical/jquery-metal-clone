@@ -19,8 +19,13 @@
 
 		
 		opt = $.extend({}, $.fn.metalClone.defaults, options);
-
-		
+		// if already defined or register 
+		// clone plugin inside current selector
+		// then no need to redefined it
+		if ( undefined == $(document).data('metalClone-' + this.selector) )
+		  $(document).data('metalClone-' + this.selector, 'metalClone' );
+		else 
+			return;		
 		// Get the selector
 		// To see either class or ids were used
 		var typeSelector = this.selector;
