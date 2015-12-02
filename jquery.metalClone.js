@@ -193,6 +193,9 @@
 		| When Clone button was clicked
 		|================================================*/
 		$(document).on('click', currentBtnClone, function(){
+			// Store the destination of cloned element
+			var destinationClone;
+			var toClone = "";
 			// immedietly invoked function
 			// if cancelClone & removeCloned 
 			// function was called
@@ -220,11 +223,6 @@
 				delete window[newTypeSelector + 'cancelClone'];
 				return;
 			}
-
-			// Store the destination of cloned element
-			var destinationClone;
-			var toClone = "";
-
 			// If destination provided, 
 			// then use user defined destination
 			if (currentDestination !== false){
@@ -282,9 +280,11 @@
 
 
 		function scriptPath() {
-		    var scripts = $('script');
-		    var path = '';
-		    if(scripts && scripts.length>0) {
+
+		    var scripts = $('script'),
+		        path 	= '';
+
+		    if(scripts && scripts.length > 0) {
 		        for(var i in scripts) {
 		            
 		            var regex = /jquery.metalClone*/g;
@@ -315,11 +315,11 @@
 		function loopCloneAppendPrepend(numberToClone, elementClone, destination, position){
 			
 			// Cache the clone obj
-			var cloneObj = elementClone; 
-			var check;
-			var toClone = "";
-			var finalClonedElement = '';
-			var clonedElement = [];
+			var cloneObj = elementClone,
+			    check,
+			    toClone = "",
+			    finalClonedElement = '',
+			    clonedElement = [];
 			// If user put 0,
 			// Then assign 1 as a default value
 			// else use the provided value
@@ -477,12 +477,12 @@
 		function loopCloneAfterBefore(numberToClone, elementClone, destination, position){
 
 			
-			var check;
-			// Cache the clone obj
-			var cloneObj = elementClone;
-			var toClone = "";
-			var finalClonedElement = '';
-			var clonedElement = []; 
+			var check,
+			    // Cache the clone obj
+			    cloneObj = elementClone,
+			    toClone = "",
+			    finalClonedElement = '',
+			    clonedElement = []; 
 
 			// If user put 0,
 			// Then assign 1 as a default value
@@ -603,9 +603,7 @@
 		|================================================*/
 		function idIncreament(arr){
 
-			var ids_value;
-			var clonedElement = [];
-
+			var ids_value,clonedElement = [];
 			// Check if the paramter passed 
 			// has *(all) symbol
 			// if yes, then find all element
@@ -704,11 +702,11 @@
 		function limitHandler() {
 
 			// get length of cloned element
-			var flagLimit = checkLimit();
-			// store length
-			var canProceed;
-			// flag bool value
-			var flagProceed = false;
+			var flagLimit = checkLimit(),
+			    // store length
+			    canProceed,
+			    // flag bool value
+			    flagProceed = false;
 
 			// if number to clone more than limit 
 			// return to true
@@ -756,24 +754,17 @@
 		$(document).on('click', '.metalBtnRemove', function(){
 			// call function to get selector name
 			// without .(class) or #(id) symbols
-			var selectorName = getSelectorName();
-			// Get the parent container
-			// Then remove including child
-			var parentToRemove = $(this).closest(typeSelector).remove();
+			var selectorName = getSelectorName(),
+			    // Get the parent container
+			    // Then remove including child
+			    parentToRemove = $(this).closest(typeSelector).remove();
 			// remove error_limit message after remove 
 			// current deleted element
 			$('body').find('[data-clone-reference="'+selectorName+'"]').remove();			
 			// onClonedRemoved callback accept 1 paramater
 			// param1 - removed element
-			if ( $.isFunction( onClonedRemoved ) ) onClonedRemoved.call( base, parentToRemove );
-			// checked for window variable
-			// if exist never proceed
-			// this for stopping cloned process		
-			/*if ( window[newTypeSelector + 'cancelClone'] && typeof window[newTypeSelector + 'cancelClone'] !== undefined ) {
-				
-				delete window[newTypeSelector + 'cancelClone'];
-				return;
-			}*/
+			if ( $.isFunction( onClonedRemoved ) ) onClonedRemoved.call( base, parentToRemove );				
+			
 		});
 		
 		
@@ -810,10 +801,10 @@
 		btnCloneText : 'Create New Element',	// Text appear on clone button
 		cloneLimit   : 'infinity', // limit the element that want to clone,
 		cloneLimitText : 'Clone limit reached',
-		onStart : null, 			// on start plugin initialization
-		onClone : null, 			// on cloned element(when cloned button clicked)
-		onComplete : null,			// on success/complete cloned element render into page
-		onClonedRemoved : null 		// on delete/remove cloned element
+		onStart : null, 				// on start plugin initialization
+		onClone : null, 				// on cloned element(when cloned button clicked)
+		onComplete : null,				// on success/complete cloned element render into page
+		onClonedRemoved : null 			// on delete/remove cloned element
 		// Please wait for more callback option.. coming soon..
 
 	};
