@@ -23,7 +23,7 @@ Simple plugin to clone DOM element.
 
 
 
--	[**V1.1.0**](https://github.com/metallurgical/jquery-metal-clone/archive/1.1.0.zip "V1.1.0")
+-	[**V1.2.0**](https://github.com/metallurgical/jquery-metal-clone/archive/1.2.0.zip "V1.2.0")
 
 
 
@@ -68,6 +68,32 @@ Configurations available for this plugin :
 7.	**btnRemoveText : 'Remove me'** : Text appeared on remove button.
 8.	**btnCloneText : 'Create New Element'** : Text appeared on clone button.
 9.	**cloneLimit** : **'infinity'** : Accept integer number only. This option limit the number of cloned element. After reach the value provided, user no longer can clone element unless remove cloned element.
+
+
+# Available Function Callback #
+1. **onStart : function( e ) { }**
+
+	OnStart callback triggered at very first plugin Initialization. At here you can setup any behaviours.  Accept one argument `e`, stand for current element to clone.
+
+2. **onClone : function( e, obj ) { }**
+
+	OnClone callback triggered at when clone button was clicked. Accept two arguments `e` and `obj` indicated for current element to clone and object itself respectively. This callback trigger before the cloning element occured. At this time you can check for element that want to clone or anything. At here, the only function can be invoked is `.cancelClone(true or false)`. This function will stop current progress of cloning element if called otherwise not and only available on this callback. `Eg usage: obj.cancelCloned( true );`, default is false. 
+
+
+3. **onComplete : function( e, obj, clonedElem ) { }**
+
+	OnComplete callback were triggered when cloning process of element done/complete/finish.
+     - e : element to clone
+     - obj : object itself
+     - clonedElem : cloned element.
+    
+    At here, the only function can be invoked is `.removeCloned(true or false)`. This function will remove cloned element and only available on this callback. `Eg usage: obj.removeCloned( true );`, default is false.
+    When `obj.removeCloned( true )` is called, `onClonedRemoved` callback also triggered.
+
+4. **onClonedRemoved : function( removedElem ) { }**
+
+	onClonedRemoved callback triggered after remove button was clicked AND element is completely removed from page. Accept one parameter `removedElem`, which is the element that are being removed.
+
 
 # Basic Usage #
 
@@ -381,5 +407,6 @@ Configurations available for this plugin :
 -	Jquery Library either minified or development.
 
 # Support #
--	norlihazmey89@gmail.com
--	If you found a bug or something technical problem, please create an issues.
+
+-	If you found a bug or something technical problem, please open an issues.
+-	IF the example/usage above did't clear enough, leave me some note by sending email at **norlihazmey89@gmail.com**

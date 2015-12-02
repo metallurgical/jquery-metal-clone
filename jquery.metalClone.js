@@ -60,7 +60,9 @@
 									'TH'
 									],
 			element,
-			flagClass            = false;		
+			flagClass            = false,
+			tdCloseParent,
+			firstTdChild;		
 
 	    if ( typeSelector.match(/[.]/) ) {
 	    	// if the selector is a class, 
@@ -76,9 +78,7 @@
 	    // if onstart callback was called
 	    // provide them self paramater
 	    if ( $.isFunction( onStart ) ) onStart.call( base, base );
-		/*=================== parent[table] ===================*/
-		var tdCloseParent;
-		var firstTdChild;		
+		/*=================== parent[table] ===================*/				
 		// only for table
 		if( $.inArray(nodeType, allNodeTableWithout) !== -1 ){
 
@@ -270,6 +270,9 @@
 				
 				delete window[newTypeSelector + 'removeCloned'];
 				$( toClone ).remove();
+				// onClonedRemoved callback accept 1 paramater
+				// param1 - removed element
+				if ( $.isFunction( onClonedRemoved ) ) onClonedRemoved.call( base, toClone );
 				
 			}
 			
