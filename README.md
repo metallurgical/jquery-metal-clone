@@ -77,7 +77,7 @@ Configurations available for this plugin :
 
 2. **onClone : function( e, obj ) { }**
 
-	OnClone callback triggered at when clone button was clicked. Accept two arguments `e` and `obj` indicated for current element to clone and object itself respectively. This callback trigger before the cloning element occured. At this time you can check for element that want to clone or anything. At here, the only function can be invoked is `.cancelClone(true or false)`. This function will stop current progress of cloning element if called otherwise not and only available on this callback. `Eg usage: obj.cancelCloned( true );`, default is false. 
+	OnClone callback triggered at when clone button was clicked. Accept two arguments `e` and `obj` indicated for current element to clone and object itself respectively. This callback trigger before the cloning element occured. At this time you can check for element that want to clone or anything. At here, the only function can be invoked is `.cancelClone(true or false)`. This function will stop current progress of cloning element if called otherwise not and only available on this callback. `Eg usage: obj.cancelClone( true );`, default is false. 
 
 
 3. **onComplete : function( e, obj, clonedElem ) { }**
