@@ -595,7 +595,7 @@
 
 		function clearForm(container){
 			
-			container.find('input:not("input[type=button], input[type=submit]"), textarea, select').each(function(){
+			container.find('input:not("input[type=button], input[type=submit], input[type=checkbox], input[type=radio]"), textarea, select').each(function(){
 				$(this).val('');
 			});
 		}
