@@ -340,7 +340,9 @@
 						if ( check ) return;
 					    toClone = cloneObj.clone();
 						toClone.insertAfter(destination.find('tr').last());
-						toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+						// image using <img tag>
+						/*toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');*/
+						toClone.find('td').last().append('<div class="operations"><div class="metalBtnRemove operationsImg metalDeleteBtn"><span>'+currentBtnRemoveText+'</span></div></div>');						
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 						clonedElement.push( toClone );
 					}
@@ -399,7 +401,9 @@
 						if ( check ) return;
 					    toClone = cloneObj.clone();
 						toClone.insertAfter(destination.find('tr').first());
-						toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+						// image using <img tag>
+						/*toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');*/
+						toClone.find('td').last().append('<div class="operations"><div class="metalBtnRemove operationsImg metalDeleteBtn"><span>'+currentBtnRemoveText+'</span></div></div>');							
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 						clonedElement.push(  toClone );
 					}
@@ -506,7 +510,9 @@
 
 						toClone = cloneObj.clone();
 						toClone.insertAfter(destination);
-						toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+						// image using <img tag>
+						/*toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');*/
+						toClone.find('td').last().append('<div class="operations"><div class="metalBtnRemove operationsImg metalDeleteBtn"><span>'+currentBtnRemoveText+'</span></div></div>');
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 						clonedElement.push(  toClone );
 					}
@@ -547,7 +553,9 @@
 
 						toClone = cloneObj.clone();
 						toClone.insertBefore(destination);
-						toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');
+						// image using <img tag>
+						/*toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');*/
+						toClone.find('td').last().append('<div class="operations"><div class="metalBtnRemove operationsImg metalDeleteBtn"><span>'+currentBtnRemoveText+'</span></div></div>');						
 						if(currentCopyValue){ /* never copy */}else{clearForm(toClone);}
 						clonedElement.push(  toClone );
 					}

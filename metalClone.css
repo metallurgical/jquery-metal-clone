@@ -25,3 +25,12 @@ span.error_limit{
 	display:block;
 	color : #D24625;
 }
+
+.metalDeleteBtn{
+	background-image: url('images/delete.png');
+	background-repeat: no-repeat;
+}
+
+.metalDeleteBtn > span{
+	margin-left:19px;
+}
