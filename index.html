@@ -625,22 +625,7 @@ $('.toClone_example12').metalClone({
 		// Example 1
 		$('.toClone_example1').metalClone({
 			btnClone 	: '.btn_example1',
-			copyValue 	: false,
-			onClone : function( e, obj ) {
-                
-                var elem;
-
-                elem = $( e ).find( ':input' ).filter( function () {
-                    //console.log( $( this ).val() )
-                    return $( this ).val() === ""
-                });
-
-                console.log(elem)
-                if ( elem.length > 0 ) {
-                    obj.cancelClone( true );
-                }
-
-            }
+			copyValue 	: false
 		});
 
 		// Example 2
