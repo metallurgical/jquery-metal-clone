@@ -26,7 +26,6 @@ gulp.task('myJs', function(){
 
 	gulp.src(['./jquery.metalClone.js'])
 		.pipe(concat('jquery.metalClone.min.js'))
-		//.pipe(stripDebug())
 		.pipe(uglify())
 		.pipe(gulp.dest('./'));
 });
