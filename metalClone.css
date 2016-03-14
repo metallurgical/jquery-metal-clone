@@ -1,3 +1,8 @@
+.operation-container {
+	position : relative;
+	width:100% !important;
+}
+
 .operations{
 	
 	display : none;
@@ -14,6 +19,9 @@
 	background-color:#fff;
 	border: 1px solid #A9A9AA;
 	padding: 10px;
+	width:100px !important;
+	max-width: 150px;
+	top:30%;
 }
 
 .operationsImg{
