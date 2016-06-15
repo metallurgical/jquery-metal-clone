@@ -34,8 +34,11 @@ Simple plugin to clone DOM element.
 Installation is so very easy. Download the current stable and see the example in Demo page. Here is the manual step to follow :
 
 1. Put `<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>` inside Head Section(**recommended using latest version**).
-2(1). If using bower : Place `<script src="bower_components/jquery-metal-clone/jquery.metalClone.min.js"></script>` after jQuery library.
-2(2). If download the plugin directly from github, just include `<script src="jquery-metal-clone/jquery.metalClone.min.js"></script>` after jQuery library.
+2. Two ways :
+	- If using bower : 
+		- Place `<script src="bower_components/jquery-metal-clone/jquery.metalClone.min.js"></script>` after jQuery library.
+	- If download the plugin directly from github :
+		- Just include `<script src="jquery-metal-clone/jquery.metalClone.min.js"></script>` after jQuery library.
 3. Done!!
 
 
