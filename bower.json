@@ -1,0 +1,22 @@
+{
+  "name": "jquery-metal-clone",
+  "description": "Simple, easy yet powerful to clone DOM elements",
+  "main": "jquery.metalClone.js",
+  "authors": [
+    "norlihazmey89@gmail.com"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "DOM",
+    "clone",
+    "jquery-clone"
+  ],
+  "homepage": "https://github.com/metallurgical/jquery-metal-clone",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
