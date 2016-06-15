@@ -410,3 +410,4 @@ Configurations available for this plugin :
 
 -	If you found a bug or something technical problem, please open an issues.
 -	IF the example/usage above did't clear enough, leave me some note by sending email at **norlihazmey89@gmail.com**
+-	If encountered any problems, just ask it from **stackoverflow.com** by using this tag : `jquery-metal-clone`
