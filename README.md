@@ -421,7 +421,7 @@ $('.toClone_example12').metalClone({
 # Support #
 
 -	If you found a bug or something technical problem, please open an issues.
--	IF the example/usage above did't clear enough, leave me some note by sending email at **norlihazmey89@gmail.com**
+-	If the example/usage above did't clear enough, leave me some note by sending email at **norlihazmey89@gmail.com**
 -	If encountered any problems, just ask it from **stackoverflow.com** by using this tag : `jquery-metal-clone`
 - Spread the words about this plugin :)
 
@@ -432,7 +432,7 @@ $('.toClone_example12').metalClone({
 
 # Changelog
 
-## [1.3.0] - 2018-04-27
+## [v1.3.0] - 2018-04-27
 ### Added
 - Compatibility to the latest stable of jquery version(v3.3.1)
 - Checking for selector of element during plugin initialisation
