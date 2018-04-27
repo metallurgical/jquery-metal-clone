@@ -413,7 +413,7 @@ $('.toClone_example12').metalClone({
 ```
 
 # Demo Page #
--	**[Click ME](https://metallurgical.github.io/metalClone "Jquery Metal Clone")**
+-	**[Click ME](https://metallurgical.github.io/jquery-metal-clone "Jquery Metal Clone")**
 
 # Dependencies #
 -	Jquery Library either minified or development.
