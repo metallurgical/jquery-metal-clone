@@ -130,8 +130,8 @@ Configurations available for this plugin :
 //**JS**
 // This selector applied for element/container that want to clone
 $('.toClone_example1').metalClone({
-	btnClone 	: '.btn_example1',
-	copyValue 	: false
+	btnClone: '.btn_example1',
+	copyValue: false
 });
 ```
 		
@@ -155,8 +155,8 @@ $('.toClone_example1').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone
 $('.toClone_example2').metalClone({
-	btnClone 	: '.btn_example2',
-	copyValue 	: true
+	btnClone: '.btn_example2',
+	copyValue: true
 });
 ```
 
@@ -179,9 +179,9 @@ $('.toClone_example2').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone
 $('.toClone_example3').metalClone({
-	btnClone 	: '.btn_example3',
-	position	: 'before',
-	copyValue 	: false
+	btnClone: '.btn_example3',
+	position: 'before',
+	copyValue: false
 });
 ```
 
@@ -204,9 +204,9 @@ $('.toClone_example3').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone
 $('.toClone_example4').metalClone({
-	btnClone 	: '.btn_example4',
-	position	: 'before',
-	copyValue 	: true
+	btnClone: '.btn_example4',
+	position: 'before',
+	copyValue: true
 });
 ```
 
@@ -229,9 +229,9 @@ $('.toClone_example4').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone
 $('.toClone_example5').metalClone({
-	btnClone 		: '.btn_example5',
-	position		: 'after',
-	numberToClone 	: 5
+	btnClone: '.btn_example5',
+	position: 'after',
+	numberToClone: 5
 });
 ```
 
@@ -257,10 +257,10 @@ $('.toClone_example5').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone 
 $('.toClone_example6').metalClone({
-	btnClone 			: '.btn_example6',
-	position			: 'after',
-	numberToClone 		: 5,
-	destination 		: '.toClone_example6_destination'
+	btnClone: '.btn_example6',
+	position: 'after',
+	numberToClone: 5,
+	destination: '.toClone_example6_destination'
 });
 ```
 
@@ -286,11 +286,11 @@ $('.toClone_example6').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone 
 $('.toClone_example7').metalClone({
-	btnClone 			: '.btn_example7',
-	position			: 'after',
-	numberToClone 		: 5,
-	destination 		: '.toClone_example7_destination',
-	ids					: ['select']
+	btnClone: '.btn_example7',
+	position: 'after',
+	numberToClone: 5,
+	destination: '.toClone_example7_destination',
+	ids: ['select']
 });
 ```
 
@@ -310,7 +310,7 @@ $('.toClone_example7').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone 
 $('.toClone_example8').metalClone({
-	position			: 'after'
+	position: 'after'
 });
 ```
 
@@ -330,9 +330,9 @@ $('.toClone_example8').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone 
 $('.toClone_example9').metalClone({
-	position			: 'after',
-	btnRemoveText		: 'Please delete me from this',
-	btnCloneText		: 'Wow, make another copy'
+	position: 'after',
+	btnRemoveText: 'Please delete me from this',
+	btnCloneText: 'Wow, make another copy'
 });
 ```
 
@@ -352,7 +352,7 @@ $('.toClone_example9').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone 
 $('.toClone_example10').metalClone({
-	cloneLimit : 3
+	cloneLimit: 3
 });
 ```
 
@@ -372,8 +372,8 @@ $('.toClone_example10').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone 
 $('.toClone_example11').metalClone({
-	cloneLimit : 3,
-	numberToClone : 2
+	cloneLimit: 3,
+	numberToClone: 2
 });
 ```
 
@@ -408,7 +408,7 @@ $('.toClone_example11').metalClone({
 //**JS**
 // This selector applied for element/container that want to clone 
 $('.toClone_example12').metalClone({
-	cloneLimit : 3
+	cloneLimit: 3
 });
 ```
 
