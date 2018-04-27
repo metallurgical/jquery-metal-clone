@@ -27,7 +27,13 @@ Simple plugin to clone DOM element.
 
 
 # Using Bower #
-- `bower install jquery-metal-clone`
+- `bower install jquery-metal-clone --save`
+
+# Using Yarn #
+- `yarn add jquery-metal-clone`
+
+# Using Npm #
+- `npm install jquery-metal-clone --save`
 
 # How To Install #
 
@@ -417,3 +423,16 @@ $('.toClone_example12').metalClone({
 -	If you found a bug or something technical problem, please open an issues.
 -	IF the example/usage above did't clear enough, leave me some note by sending email at **norlihazmey89@gmail.com**
 -	If encountered any problems, just ask it from **stackoverflow.com** by using this tag : `jquery-metal-clone`
+- Spread the words about this plugin :)
+
+# Next Release
+
+- Support for font-awesome for deleted icon(for table)
+- Look and feel for popup of deleted rows(for table)
+
+# Changelog
+
+## [1.3.0] - 2018-04-27
+### Added
+- Compatibility to the latest stable of jquery version(v3.3.1)
+- Checking for selector of element during plugin initialisation
