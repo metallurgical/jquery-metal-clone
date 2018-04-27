@@ -23,7 +23,7 @@ Simple plugin to clone DOM element.
 
 
 
--	[**V1.2.0**](https://github.com/metallurgical/jquery-metal-clone/archive/v1.2.0-1.zip "V1.2.0")
+-	[**V1.3.0**](https://github.com/metallurgical/jquery-metal-clone/archive/v1.3.0.zip "V1.3.0")
 
 
 # Using Bower #

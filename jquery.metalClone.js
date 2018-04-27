@@ -8,7 +8,7 @@
  | @license    Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
  |             and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  | @copyright  (c) 2015 Norlihazmey(metallurgical)
- | @version    1.2.0
+ | @version    1.3.0
  | @Github 	   https://github.com/metallurgical/jquery-metal-clone
  |===================================================================*/
 
@@ -22,17 +22,24 @@
         opt = cloned = $.extend({}, $.fn.metalClone.defaults, options);
         var base = clonedElement = this;
 
-        return base.each(function() {
+        return base.each(function(index, elem) {
             // if already defined or register 
             // clone plugin inside current selector
             // then no need to redefined it
-            if (undefined == $(document).data('metalClone-' + base.selector))
-                $(document).data('metalClone-' + base.selector, 'metalClone');
+            var classOrId = $(elem).attr('id') || $(elem).attr('class');
+
+            if (!classOrId) {
+                classOrId = elem;
+            }
+
+            if (undefined == $(document).data('metalClone-' + classOrId))
+                $(document).data('metalClone-' + classOrId, 'metalClone');
             else
                 return;
+
             // Get the selector
             // To see either class or ids were used
-            var typeSelector = base.selector,
+            var typeSelector = base.selector || '.' + classOrId,
                 // remove either . or # for class and ID respectively
                 newTypeSelector = typeSelector.replace(/^(\.|\#)/, ''),
                 nodeType = base[0].nodeName,
