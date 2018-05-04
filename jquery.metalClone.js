@@ -9,21 +9,20 @@
  |             and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  | @copyright  (c) 2015 Norlihazmey(metallurgical)
  | @version    1.3.0
- | @Github 	   https://github.com/metallurgical/jquery-metal-clone
+ | @Github     https://github.com/metallurgical/jquery-metal-clone
  |===================================================================*/
 
 ;
 (function($) {
 
-
     $.fn.metalClone = function(options, callback) {
-
 
         opt = cloned = $.extend({}, $.fn.metalClone.defaults, options);
         var base = clonedElement = this;
 
         return base.each(function(index, elem) {
-            // if already defined or register 
+
+            // if already defined or register
             // clone plugin inside current selector
             // then no need to redefined it
             var classOrId = $(elem).attr('id') || $(elem).attr('class');
@@ -32,16 +31,24 @@
                 classOrId = elem;
             }
 
-            if (undefined == $(document).data('metalClone-' + classOrId))
-                $(document).data('metalClone-' + classOrId, 'metalClone');
-            else
+            var generatedReferenceNo = Math.floor(Math.random() * 99999999999 + 1);
+
+            $(elem).data('metalCloneRef', generatedReferenceNo);
+            $(elem).addClass('metalElement' + generatedReferenceNo);
+
+            if (undefined == $(elem).data('metalClone-' + classOrId)) {
+                $(elem).data('metalClone-' + classOrId, 'metalClone');
+            } else {
                 return;
+            }
 
             // Get the selector
             // To see either class or ids were used
             var typeSelector = base.selector || '.' + classOrId,
+                generatedSelectorClass = '.metalElement' + generatedReferenceNo,
+                generatedSelectorClassForRemoveBtn = generatedSelectorClass.replace('.', '') + 'BtnRemove',
                 // remove either . or # for class and ID respectively
-                newTypeSelector = typeSelector.replace(/^(\.|\#)/, ''),
+                newTypeSelector = generatedSelectorClass,
                 nodeType = base[0].nodeName,
                 // Capture the configuration options
                 currentCopyValue = opt.copyValue,
@@ -53,6 +60,7 @@
                 destinationNodeType = (currentDestination) ? $(currentDestination)[0].nodeName : 'none',
                 cloneLimit = opt.cloneLimit,
                 cloneLimitText = opt.cloneLimitText,
+                cloneLimitClass = opt.cloneLimitClass,
                 onStart = opt.onStart,
                 onClone = opt.onClone,
                 onComplete = opt.onComplete,
@@ -88,22 +96,22 @@
             /*=================== parent[table] ===================*/
             // only for table
             if ($.inArray(nodeType, allNodeTableWithout) !== -1) {
-
                 tdCloseParent = element.closest('table');
                 firstTdChild = tdCloseParent.find('tr').first();
-
-
             }
 
-            /*===============================================
+            /*
+            |------------------------------------------------
             | Default clone button
-            |================================================
+            |------------------------------------------------
             | If user did't not provided the class or id name for 
             | cloned button, then system will provided one
-            |================================================*/
+            |
+            */
 
             // initialize global variable for clone button
             var currentBtnClone;
+            var btnClonePosition;
 
             // If user not defined clone button, 
             // then make new one
@@ -111,77 +119,46 @@
                 // create new clone button with unique id
                 currentBtnClone = "metalBtnClone" + Math.floor(Math.random() * 99999999999 + 1);
 
-
-
                 // if selector is a table and destination not table
                 if (($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)) {
-
-                    $('<input/>', {
-
-                        type: 'button',
-                        value: opt.btnCloneText,
-                        class: currentBtnClone,
-                        css: {
-                            marginTop: '10px'
-                        }
-
-                    }).insertAfter(tdCloseParent);
+                    btnClonePosition = tdCloseParent;
                 }
                 // if selector is a table element and destination is a table
                 else if (($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)) {
-
-                    $('<input/>', {
-
-                        type: 'button',
-                        value: opt.btnCloneText,
-                        class: currentBtnClone,
-                        css: {
-                            marginTop: '10px'
-                        }
-
-                    }).insertAfter(tdCloseParent);
+                    btnClonePosition = tdCloseParent;
                 }
                 // if a selector is not a table && destination not a table
                 else if (($.inArray(nodeType, allNodeTableWithout) == -1) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)) {
-
-                    $('<input/>', {
-
-                        type: 'button',
-                        value: opt.btnCloneText,
-                        class: currentBtnClone,
-                        css: {
-                            marginTop: '10px'
-                        }
-
-                    }).insertAfter(typeSelector);
+                    btnClonePosition = elem;
                 }
                 // if selector is not a table element and destination is a table
                 else if (($.inArray(nodeType, allNodeTableWithout) == -1) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)) {
-
-                    $('<input/>', {
-
-                        type: 'button',
-                        value: opt.btnCloneText,
-                        class: currentBtnClone,
-                        css: {
-                            marginTop: '10px'
-                        }
-
-                    }).insertAfter(typeSelector);
+                    btnClonePosition = elem;
                 }
 
-                // Concat the . sysmbol at beggining of 
+                $('<button/>', {
+                    type: 'button',
+                    text: opt.btnCloneText,
+                    class: currentBtnClone + ((opt.btnCloneClass && typeof opt.btnCloneClass !== 'number') ? ' ' + opt.btnCloneClass : ''),
+                    css: {
+                        marginTop: '10px'
+                    }
+                }).insertAfter(btnClonePosition);
+
+                // Concat the . sysmbol at beggining of
                 // class name for dynamic create button
                 currentBtnClone = '.' + currentBtnClone;
             }
+
             // if user defined the button itself,
             // then use user defined button instead
             else {
                 currentBtnClone = opt.btnClone;
             }
 
-            $(document).on({
+            $(currentBtnClone).data('metalCloneButtonRef', generatedReferenceNo);
 
+            $(document).on({
                 mouseenter: function() {
 
                     $(this).find('.operations').css({
@@ -194,13 +171,14 @@
                         display: 'none'
                     });
                 }
+            }, generatedSelectorClass);
 
-            }, typeSelector);
             /*===============================================
             | When Clone button was clicked
             |================================================*/
             $(document).on('click', currentBtnClone, function() {
                 // Store the destination of cloned element
+                var $that = $(this);
                 var destinationClone;
                 var toClone = "";
                 // immedietly invoked function
@@ -217,17 +195,17 @@
                     opt.removeCloned = function(flag) {
                         if (flag) window[newTypeSelector + 'removeCloned'] = flag;
                     };
-                })(newTypeSelector);
+                })(generatedSelectorClass);
                 // onClone callback accept 2 paramaters
                 // param1 - current cloned
                 // param2 - current object 
                 if ($.isFunction(onClone)) onClone.call(base, base, cloned);
                 // checked for window variable
                 // if exist never proceed
-                // this for stopping cloned process		
-                if (window[newTypeSelector + 'cancelClone'] && typeof window[newTypeSelector + 'cancelClone'] !== undefined) {
+                // this for stopping cloned process     
+                if (window[generatedSelectorClass + 'cancelClone'] && typeof window[generatedSelectorClass + 'cancelClone'] !== undefined) {
 
-                    delete window[newTypeSelector + 'cancelClone'];
+                    delete window[generatedSelectorClass + 'cancelClone'];
                     return;
                 }
                 // If destination provided, 
@@ -241,27 +219,20 @@
                     // on user defined position
                     if (currentPosition === "after") {
                         toClone = loopCloneAppendPrepend(currentNumberToClone, element, destinationClone, currentPosition);
-                        //return;
                     } else {
                         toClone = loopCloneAppendPrepend(currentNumberToClone, element, destinationClone, currentPosition);
-                        //return;
                     }
-
                 }
                 // If did't provied,just clone element 
                 // after/before cloned element
                 else {
-
-                    destinationClone = $(typeSelector);
+                    destinationClone = $(generatedSelectorClass);
 
                     if (currentPosition === "after") {
                         toClone = loopCloneAfterBefore(currentNumberToClone, element, destinationClone.last(), currentPosition);
-                        //return;
                     } else {
                         toClone = loopCloneAfterBefore(currentNumberToClone, element, destinationClone.first(), currentPosition);
-                        //return;
                     }
-
                 }
                 // trigger onComplete callback if 
                 // user defined it
@@ -269,25 +240,21 @@
                 // clonedElement --> the element that want to clone
                 // cloned --> plugin itself
                 // toClone --> cloned element that being cloned
-                if ($.isFunction(onComplete)) onComplete.call(base, clonedElement, cloned, toClone);
+                if ($.isFunction(onComplete)) onComplete.call(base, $(elem), cloned, toClone);
                 // if user want to remove cloned element
                 // which is set to TRUE, then we remove
                 // cloned element
-                if (window[newTypeSelector + 'removeCloned'] && typeof window[newTypeSelector + 'removeCloned'] !== undefined) {
+                if (window[generatedSelectorClass + 'removeCloned'] && typeof window[generatedSelectorClass + 'removeCloned'] !== undefined) {
 
-                    delete window[newTypeSelector + 'removeCloned'];
+                    delete window[generatedSelectorClass + 'removeCloned'];
                     $(toClone).remove();
                     // onClonedRemoved callback accept 1 paramater
                     // param1 - removed element
                     if ($.isFunction(onClonedRemoved)) onClonedRemoved.call(base, toClone);
-
                 }
 
                 return;
-
-
             });
-
 
             function scriptPath() {
 
@@ -310,15 +277,13 @@
                 return path;
             };
 
-
-
             /*===============================================
             | Function to clone element(IF destination provided)
             |================================================
-            | numberToClone		: Number of container to clone
-            | elementClone		: Element want to clone
-            | destination 	 	: Placeholder/destination to place the cloned element
-            | position			: Position of newly cloned element
+            | numberToClone     : Number of container to clone
+            | elementClone      : Element want to clone
+            | destination       : Placeholder/destination to place the cloned element
+            | position          : Position of newly cloned element
             |
             |
             |===============================================*/
@@ -347,9 +312,7 @@
                             if (check) return;
                             toClone = cloneObj.clone();
                             toClone.insertAfter(destination.find('tr').last());
-                            // image using <img tag>
-                            /*toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');*/
-                            toClone.find('td').last().append('<div class="operation-container"><div class="operations"><div class="metalBtnRemove operationsImg metalDeleteBtn"><span>' + currentBtnRemoveText + '</span></div></div></div>');
+                            toClone.find('td').last().append(getRemoveButtonStructure('table'));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -365,7 +328,7 @@
                             check = limitHandler();
                             if (check) return;
                             toClone = cloneObj.clone();
-                            destination.append(toClone.append('<input type="button" value="' + currentBtnRemoveText + '" class="metalBtnRemove">'));
+                            destination.append(toClone.append(getRemoveButtonStructure('div')));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -380,7 +343,7 @@
                             check = limitHandler();
                             if (check) return;
                             toClone = cloneObj.clone();
-                            destination.append(toClone.append('<input type="button" value="' + currentBtnRemoveText + '" class="metalBtnRemove">'));
+                            destination.append(toClone.append(getRemoveButtonStructure('div')));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -394,7 +357,7 @@
                             check = limitHandler();
                             if (check) return;
                             toClone = cloneObj.clone();
-                            destination.append(toClone.append('<input type="button" value="' + currentBtnRemoveText + '" class="metalBtnRemove">'));
+                            destination.append(toClone.append(getRemoveButtonStructure('div')));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -416,9 +379,7 @@
                             if (check) return;
                             toClone = cloneObj.clone();
                             toClone.insertAfter(destination.find('tr').first());
-                            // image using <img tag>
-                            /*toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');*/
-                            toClone.find('td').last().append('<div class="operation-container"><div class="operations"><div class="metalBtnRemove operationsImg metalDeleteBtn"><span>' + currentBtnRemoveText + '</span></div></div></div>');
+                            toClone.find('td').last().append(getRemoveButtonStructure('table'));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -433,7 +394,7 @@
                             check = limitHandler();
                             if (check) return;
                             toClone = cloneObj.clone();
-                            destination.prepend(toClone.append('<input type="button" value="' + currentBtnRemoveText + '" class="metalBtnRemove">'));
+                            destination.prepend(toClone.append(getRemoveButtonStructure('div')));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -447,7 +408,7 @@
                             check = limitHandler();
                             if (check) return;
                             toClone = cloneObj.clone();
-                            destination.prepend(toClone.append('<input type="button" value="' + currentBtnRemoveText + '" class="metalBtnRemove">'));
+                            destination.prepend(toClone.append(getRemoveButtonStructure('div')));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -461,7 +422,7 @@
                             check = limitHandler();
                             if (check) return;
                             toClone = cloneObj.clone();
-                            destination.prepend(toClone.append('<input type="button" value="' + currentBtnRemoveText + '" class="metalBtnRemove">'));
+                            destination.prepend(toClone.append(getRemoveButtonStructure('div')));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -480,7 +441,7 @@
                     finalClonedElement = $.map(clonedElement, function(e, i) {
                             return $(e).get(0)
                         })
-                        //console.log(finalClonedElement)	
+                        //console.log(finalClonedElement)   
                 }
                 // If user provided element in array container
                 // Then call the function
@@ -497,10 +458,10 @@
             /*===============================================
             | Function to clone element(IF destination not provided)
             |================================================
-            | numberToClone		: Number of container to clone
-            | elementClone		: Element want to clone
-            | destination 	 	: Placeholder/destination to place the cloned element
-            | position			: Position of newly cloned element
+            | numberToClone     : Number of container to clone
+            | elementClone      : Element want to clone
+            | destination       : Placeholder/destination to place the cloned element
+            | position          : Position of newly cloned element
             |
             |
             |===============================================*/
@@ -533,9 +494,7 @@
 
                             toClone = cloneObj.clone();
                             toClone.insertAfter(destination);
-                            // image using <img tag>
-                            /*toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');*/
-                            toClone.find('td').last().append('<div class="operation-container"><div class="operations"><div class="metalBtnRemove operationsImg metalDeleteBtn"><span>' + currentBtnRemoveText + '</span></div></div></div>');
+                            toClone.find('td').last().append(getRemoveButtonStructure('table'));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
@@ -554,14 +513,13 @@
 
                             toClone = cloneObj.clone();
                             toClone.insertAfter(destination)
-                                .append('<input type="button" value="' + currentBtnRemoveText + '" class="metalBtnRemove">');
+                                .append(getRemoveButtonStructure('div'));
 
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
+
                             clonedElement.push(toClone);
-
-
                         }
                     }
 
@@ -580,12 +538,11 @@
 
                             toClone = cloneObj.clone();
                             toClone.insertBefore(destination);
-                            // image using <img tag>
-                            /*toClone.find('td').last().append('<div class="operations"><img src="'+scriptPath()+'/images/delete.png" class="metalBtnRemove operationsImg"/> '+currentBtnRemoveText+'</div>');*/
-                            toClone.find('td').last().append('<div class="operation-container"><div class="operations"><div class="metalBtnRemove operationsImg metalDeleteBtn"><span>' + currentBtnRemoveText + '</span></div></div></div>');
+                            toClone.find('td').last().append(getRemoveButtonStructure('table'));
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
+
                             clonedElement.push(toClone);
                         }
 
@@ -599,11 +556,12 @@
 
                             toClone = cloneObj.clone();
                             toClone.insertBefore(destination)
-                                .append('<input type="button" value="' + currentBtnRemoveText + '" class="metalBtnRemove">');
+                                .append(getRemoveButtonStructure('div'));
 
                             if (currentCopyValue) { /* never copy */ } else {
                                 clearForm(toClone);
                             }
+
                             clonedElement.push(toClone);
                         }
                     }
@@ -612,11 +570,9 @@
                 // If the opt.ids is an empty array
                 // Is a default value
                 if ($.isArray(currentIds) && $.isEmptyObject(currentIds)) {
-
                     finalClonedElement = $.map(clonedElement, function(e, i) {
-                            return $(e).get(0)
-                        })
-                        //console.log(finalClonedElement)	
+                        return $(e).get(0)
+                    })
                 }
                 // If user provided element in array container
                 // Then call the function
@@ -638,6 +594,21 @@
                 });
             }
 
+            /**
+             * Get remove button element.
+             *
+             * @param type Either "table" or "else"
+             * @returns DOMElement
+             */
+            function getRemoveButtonStructure(type) {
+                switch (type) {
+                    case 'table':
+                        return '<div class="operation-container"><div class="operations"><div class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove operationsImg metalDeleteBtn"><span>' + currentBtnRemoveText + '</span></div></div></div>';
+                        break;
+                    default:
+                        return '<button type="button" class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove ' + ((opt.btnRemoveClass && typeof opt.btnRemoveClass !== 'number') ? opt.btnRemoveClass : '') + '" style="margin-bottom: 20px">' + currentBtnRemoveText + '</button>';
+                }
+            }
 
             /*===============================================
             | Function to clone element(IF destination not provided)
@@ -658,8 +629,8 @@
                 }
 
 
-                // iterate throught cloned container			
-                $(typeSelector).not(':first').each(function(inc, e) {
+                // iterate throught cloned container            
+                $(generatedSelectorClass).not(':first').each(function(inc, e) {
                     // then find the element either * or a few
                     // depend on user defined and default value
                     $(this).find(ids_value).each(function(i, ee) {
@@ -695,14 +666,14 @@
                 // if the selector is a class
                 // then no problem, just get length
                 // of all the element with same class existed
-                if (flagClass)
-                    numberOfCloneElementExisted = $(typeSelector).length;
+                // if (flagClass)
+                //     numberOfCloneElementExisted = $(generatedSelectorClass).length;
                 // if the selector is an IDs
                 // then, find all the element with
                 // same id with same name
-                else
-                    numberOfCloneElementExisted = $('[id="' + base[0].id + '"').length;
-
+                // else
+                //     numberOfCloneElementExisted = $('[id="' + base[0].id + '"]').length;
+                numberOfCloneElementExisted = $(generatedSelectorClass).length;
                 // if the clone limit option provided by users
                 // and the input is a number
                 if (cloneLimit != "infinity" && typeof cloneLimit == "number") {
@@ -731,9 +702,9 @@
 
                 var name;
                 if (flagClass)
-                    name = typeSelector.replace('.', '');
+                    name = generatedSelectorClass.replace('.', '');
                 else
-                    name = typeSelector.replace('#', '');
+                    name = generatedSelectorClass.replace('#', '');
 
                 return name;
             }
@@ -752,7 +723,8 @@
                 // if number to clone more than limit 
                 // return to true
                 if (!flagLimit) {
-                    console.log('Number to clone more than limit');
+                    console.error('MetalClone Error: numberToClone option defined is more than cloneLimit option');
+                    alert('MetalClone Error: numberToClone option defined is more than cloneLimit option');
 
                     flagProceed = true;
                 }
@@ -776,11 +748,11 @@
                         // after clone button
                         $('<span/>', {
                             'data-clone-reference': selectorName,
-                            class: 'error_limit',
+                            class: 'metal-error-limit' + ((cloneLimitClass && typeof cloneLimitClass !== 'number') ? ' ' + cloneLimitClass : ''),
                             text: cloneLimitText
                         }).insertAfter(currentBtnClone);
                     }
-                    //.after('<span')
+
                     flagProceed = true;
                 }
 
@@ -792,27 +764,24 @@
             /*===============================================
             | When Remove button was clicked
             |================================================*/
-            $(document).on('click', '.metalBtnRemove', function() {
+            $(document).on('click', 'button.' + generatedSelectorClassForRemoveBtn + ',div.' + generatedSelectorClassForRemoveBtn, function() {
                 // call function to get selector name
                 // without .(class) or #(id) symbols
                 var selectorName = getSelectorName(),
                     // Get the parent container
                     // Then remove including child
-                    parentToRemove = $(this).closest(typeSelector).remove();
+                    parentToRemove = $(this).closest(generatedSelectorClass).remove();
+
+                console.log(selectorName)
                 // remove error_limit message after remove 
                 // current deleted element
                 $('body').find('[data-clone-reference="' + selectorName + '"]').remove();
                 // onClonedRemoved callback accept 1 paramater
                 // param1 - removed element
                 if ($.isFunction(onClonedRemoved)) onClonedRemoved.call(base, parentToRemove);
-
             });
 
-
-
         });
-
-
 
     };
 
@@ -833,15 +802,16 @@
         // - strong
         // - h1-h6
         // * -> find all element inside container
-        // - ......
-        // ~~~~~ all HTML tag are availeble
 
         btnClone: null, // Put your selector(button class or id name) eg : .clickMe | #clickMe
         copyValue: false, // Clone together the previous element value - available for form element only
         btnRemoveText: 'Remove me', // Text appear on remove button
+        btnRemoveClass: null, // Adding user defined class name for remove button
         btnCloneText: 'Create New Element', // Text appear on clone button
+        btnCloneClass: null, // Adding user defined class name for clone button
         cloneLimit: 'infinity', // limit the element that want to clone,
         cloneLimitText: 'Clone limit reached',
+        cloneLimitClass: null, // Adding user defined class name for clone limit message
         onStart: null, // on start plugin initialization
         onClone: null, // on cloned element(when cloned button clicked)
         onComplete: null, // on success/complete cloned element render into page

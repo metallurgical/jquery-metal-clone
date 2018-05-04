@@ -28,7 +28,7 @@
 	cursor: pointer;
 }
 
-span.error_limit{
+span.metal-error-limit{
 	margin:10px 0;
 	display:block;
 	color : #D24625;
