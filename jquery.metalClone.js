@@ -1,7 +1,7 @@
 /*===================================================================
- | jQuery Metal Clone Plugins 
+ | jQuery Metal Clone Plugins
  |===================================================================
- | http://thunderwide.com 
+ | http://thunderwide.com
  |
  | @category   Plugins
  | @author     Norlihazmey <norlihazmey89@thunderwide.com>
@@ -61,6 +61,14 @@
                 cloneLimit = opt.cloneLimit,
                 cloneLimitText = opt.cloneLimitText,
                 cloneLimitClass = opt.cloneLimitClass,
+                enableIcon = opt.enableIcon,
+                fontAwesomeTheme = opt.fontAwesomeTheme,
+                fontAwesomeClass = opt.fontAwesomeClass,
+                fontAwesomeDataTransform = opt.fontAwesomeDataTransform,
+                fontAwesomeDataMask = opt.fontAwesomeDataMask,
+                enableConfirmMessage = opt.enableConfirmMessage,
+                confirmMessageText = opt.confirmMessageText,
+                defaultFontAwesomeTheme = ['regular', 'solid', 'brand', 'light', 'basic'],
                 onStart = opt.onStart,
                 onClone = opt.onClone,
                 onComplete = opt.onComplete,
@@ -81,7 +89,7 @@
                 firstTdChild;
 
             if (typeSelector.match(/[.]/)) {
-                // if the selector is a class, 
+                // if the selector is a class,
                 // then take the first element only
                 flagClass = true;
                 element = $(this).first();
@@ -104,7 +112,7 @@
             |------------------------------------------------
             | Default clone button
             |------------------------------------------------
-            | If user did't not provided the class or id name for 
+            | If user did't not provided the class or id name for
             | cloned button, then system will provided one
             |
             */
@@ -113,7 +121,7 @@
             var currentBtnClone;
             var btnClonePosition;
 
-            // If user not defined clone button, 
+            // If user not defined clone button,
             // then make new one
             if (opt.btnClone === null) {
                 // create new clone button with unique id
@@ -182,11 +190,11 @@
                 var destinationClone;
                 var toClone = "";
                 // immedietly invoked function
-                // if cancelClone & removeCloned 
+                // if cancelClone & removeCloned
                 // function was called
                 // then register new window properties for its
                 // unique selector name with true value
-                // later on we check this value to 
+                // later on we check this value to
                 // do something depend on it
                 (function(newTypeSelector) {
                     opt.cancelClone = function(flag) {
@@ -198,17 +206,17 @@
                 })(generatedSelectorClass);
                 // onClone callback accept 2 paramaters
                 // param1 - current cloned
-                // param2 - current object 
+                // param2 - current object
                 if ($.isFunction(onClone)) onClone.call(base, base, cloned);
                 // checked for window variable
                 // if exist never proceed
-                // this for stopping cloned process     
+                // this for stopping cloned process
                 if (window[generatedSelectorClass + 'cancelClone'] && typeof window[generatedSelectorClass + 'cancelClone'] !== undefined) {
 
                     delete window[generatedSelectorClass + 'cancelClone'];
                     return;
                 }
-                // If destination provided, 
+                // If destination provided,
                 // then use user defined destination
                 if (currentDestination !== false) {
 
@@ -223,7 +231,7 @@
                         toClone = loopCloneAppendPrepend(currentNumberToClone, element, destinationClone, currentPosition);
                     }
                 }
-                // If did't provied,just clone element 
+                // If did't provied,just clone element
                 // after/before cloned element
                 else {
                     destinationClone = $(generatedSelectorClass);
@@ -234,7 +242,7 @@
                         toClone = loopCloneAfterBefore(currentNumberToClone, element, destinationClone.first(), currentPosition);
                     }
                 }
-                // trigger onComplete callback if 
+                // trigger onComplete callback if
                 // user defined it
                 // base --> current context
                 // clonedElement --> the element that want to clone
@@ -441,7 +449,7 @@
                     finalClonedElement = $.map(clonedElement, function(e, i) {
                             return $(e).get(0)
                         })
-                        //console.log(finalClonedElement)   
+                        //console.log(finalClonedElement)
                 }
                 // If user provided element in array container
                 // Then call the function
@@ -601,12 +609,48 @@
              * @returns DOMElement
              */
             function getRemoveButtonStructure(type) {
+
+                var iconContent = '';
+
+                if (enableIcon) {
+                    iconContent = '<i class="' + getFontAwesomeThemeType() + ' ' + fontAwesomeClass + '" data-fa-transform="' + fontAwesomeDataTransform + '" data-fa-mask="' + fontAwesomeDataMask + '"></i> ';
+                }
+
                 switch (type) {
                     case 'table':
-                        return '<div class="operation-container"><div class="operations"><div class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove operationsImg metalDeleteBtn"><span>' + currentBtnRemoveText + '</span></div></div></div>';
+                        return '<div class="operation-container"><div class="operations"><div class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove operationsImg">' + iconContent + '<span>' + currentBtnRemoveText + '</span></div></div></div>';
                         break;
                     default:
-                        return '<button type="button" class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove ' + ((opt.btnRemoveClass && typeof opt.btnRemoveClass !== 'number') ? opt.btnRemoveClass : '') + '" style="margin-bottom: 20px">' + currentBtnRemoveText + '</button>';
+                        return '<button type="button" class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove ' + ((opt.btnRemoveClass && typeof opt.btnRemoveClass !== 'number') ? opt.btnRemoveClass : '') + '" style="margin-bottom: 20px">' + iconContent + currentBtnRemoveText + '</button>';
+                }
+            }
+
+            /**
+             * Get font awesome theme.
+             *
+             * @returns {string}
+             */
+            function getFontAwesomeThemeType()
+            {
+                if ($.inArray(fontAwesomeTheme, defaultFontAwesomeTheme) === -1) {
+                    return 'far';
+                }
+
+                switch (fontAwesomeTheme) {
+                    case 'solid':
+                        return 'fas';
+                        break;
+                    case 'brand':
+                        return 'fab';
+                        break;
+                    case 'light':
+                        return 'fal';
+                        break;
+                    case 'basic':
+                        return 'fa';
+                        break;
+                    default:
+                        return 'far';
                 }
             }
 
@@ -616,7 +660,7 @@
             function idIncreament(arr) {
 
                 var ids_value, clonedElement = [];
-                // Check if the paramter passed 
+                // Check if the paramter passed
                 // has *(all) symbol
                 // if yes, then find all element
                 if ($.inArray('*', arr)) {
@@ -629,7 +673,7 @@
                 }
 
 
-                // iterate throught cloned container            
+                // iterate throught cloned container
                 $(generatedSelectorClass).not(':first').each(function(inc, e) {
                     // then find the element either * or a few
                     // depend on user defined and default value
@@ -643,7 +687,7 @@
                             // Get the original value
                             var oldValue = $(this).attr('id');
                             var newValue = oldValue.replace(/\d+/g, '');
-                            //var increValue = 
+                            //var increValue =
                             // Set the new id(s) value
                             $(this).attr('id', newValue + parseInt(inc));
                         }
@@ -682,7 +726,7 @@
                     // then return false
                     if (currentNumberToClone > cloneLimit) {
                         return false;
-                        // if meet the condition, then return the length 
+                        // if meet the condition, then return the length
                         // of clone element existed
                     } else {
                         return numberOfCloneElementExisted;
@@ -699,8 +743,8 @@
             }
 
             function getSelectorName() {
-
                 var name;
+
                 if (flagClass)
                     name = generatedSelectorClass.replace('.', '');
                 else
@@ -720,7 +764,7 @@
                     // flag bool value
                     flagProceed = false;
 
-                // if number to clone more than limit 
+                // if number to clone more than limit
                 // return to true
                 if (!flagLimit) {
                     console.error('MetalClone Error: numberToClone option defined is more than cloneLimit option');
@@ -765,6 +809,12 @@
             | When Remove button was clicked
             |================================================*/
             $(document).on('click', 'button.' + generatedSelectorClassForRemoveBtn + ',div.' + generatedSelectorClassForRemoveBtn, function() {
+
+                if (typeof enableConfirmMessage === 'boolean' && enableConfirmMessage) {
+                    if (!confirm(confirmMessageText)) {
+                        return false;
+                    }
+                }
                 // call function to get selector name
                 // without .(class) or #(id) symbols
                 var selectorName = getSelectorName(),
@@ -773,7 +823,7 @@
                     parentToRemove = $(this).closest(generatedSelectorClass).remove();
 
                 console.log(selectorName)
-                // remove error_limit message after remove 
+                // remove error_limit message after remove
                 // current deleted element
                 $('body').find('[data-clone-reference="' + selectorName + '"]').remove();
                 // onClonedRemoved callback accept 1 paramater
@@ -805,7 +855,7 @@
 
         btnClone: null, // Put your selector(button class or id name) eg : .clickMe | #clickMe
         copyValue: false, // Clone together the previous element value - available for form element only
-        btnRemoveText: 'Remove me', // Text appear on remove button
+        btnRemoveText: 'Remove', // Text appear on remove button
         btnRemoveClass: null, // Adding user defined class name for remove button
         btnCloneText: 'Create New Element', // Text appear on clone button
         btnCloneClass: null, // Adding user defined class name for clone button
@@ -815,7 +865,14 @@
         onStart: null, // on start plugin initialization
         onClone: null, // on cloned element(when cloned button clicked)
         onComplete: null, // on success/complete cloned element render into page
-        onClonedRemoved: null // on delete/remove cloned element
+        onClonedRemoved: null, // on delete/remove cloned element,
+        fontAwesomeTheme: 'regular', // Available option "regular", "solid", "brand", "light", "basic"
+        fontAwesomeClass: 'fa-trash-alt',
+        fontAwesomeDataTransform: '',
+        fontAwesomeDataMask: '',
+        enableIcon: true,
+        enableConfirmMessage: true,
+        confirmMessageText: 'Are you sure?'
             // Please wait for more callback option.. coming soon..
 
     };
