@@ -63,9 +63,12 @@
                 cloneLimitClass = opt.cloneLimitClass,
                 enableIcon = opt.enableIcon,
                 fontAwesomeTheme = opt.fontAwesomeTheme,
-                fontAwesomeClass = opt.fontAwesomeClass,
-                fontAwesomeDataTransform = opt.fontAwesomeDataTransform,
-                fontAwesomeDataMask = opt.fontAwesomeDataMask,
+                fontAwesomeRemoveClass = opt.fontAwesomeRemoveClass,
+                fontAwesomeAddClass = opt.fontAwesomeAddClass,
+                fontAwesomeAddDataTransform = opt.fontAwesomeAddDataTransform,
+                fontAwesomeAddDataMask = opt.fontAwesomeAddDataMask,
+                fontAwesomeRemoveDataTransform = opt.fontAwesomeRemoveDataTransform,
+                fontAwesomeRemoveDataMask = opt.fontAwesomeRemoveDataMask,
                 enableConfirmMessage = opt.enableConfirmMessage,
                 confirmMessageText = opt.confirmMessageText,
                 defaultFontAwesomeTheme = ['regular', 'solid', 'brand', 'light', 'basic'],
@@ -162,6 +165,11 @@
             // then use user defined button instead
             else {
                 currentBtnClone = opt.btnClone;
+            }
+
+            if (enableIcon) {
+                var iconContent = '<i class="' + getFontAwesomeThemeType() + ' ' + fontAwesomeAddClass + '" data-fa-transform="' + fontAwesomeAddDataTransform + '" data-fa-mask="' + fontAwesomeAddDataMask + '"></i> ';
+                $(currentBtnClone).get(0).insertAdjacentHTML('afterbegin', iconContent);
             }
 
             $(currentBtnClone).data('metalCloneButtonRef', generatedReferenceNo);
@@ -613,7 +621,7 @@
                 var iconContent = '';
 
                 if (enableIcon) {
-                    iconContent = '<i class="' + getFontAwesomeThemeType() + ' ' + fontAwesomeClass + '" data-fa-transform="' + fontAwesomeDataTransform + '" data-fa-mask="' + fontAwesomeDataMask + '"></i> ';
+                    iconContent = '<i class="' + getFontAwesomeThemeType() + ' ' + fontAwesomeRemoveClass + '" data-fa-transform="' + fontAwesomeRemoveDataTransform + '" data-fa-mask="' + fontAwesomeRemoveDataMask + '"></i> ';
                 }
 
                 switch (type) {
@@ -866,13 +874,17 @@
         onClone: null, // on cloned element(when cloned button clicked)
         onComplete: null, // on success/complete cloned element render into page
         onClonedRemoved: null, // on delete/remove cloned element,
-        fontAwesomeTheme: 'regular', // Available option "regular", "solid", "brand", "light", "basic"
-        fontAwesomeClass: 'fa-trash-alt',
-        fontAwesomeDataTransform: '',
-        fontAwesomeDataMask: '',
-        enableIcon: true,
-        enableConfirmMessage: true,
-        confirmMessageText: 'Are you sure?'
+        enableIcon: true, // Set to false to hide button's icon
+        // These sections only available when "enableIcon" set to true"
+        fontAwesomeTheme: 'solid', // Available option "regular", "solid", "brand", "light", "basic"
+        fontAwesomeRemoveClass: 'fa-trash-alt', // Reference: https://fontawesome.com/icons?d=gallery
+        fontAwesomeAddClass: 'fa-plus', // Reference: https://fontawesome.com/icons?d=gallery
+        fontAwesomeAddDataTransform: '', // Reference: https://fontawesome.com/how-to-use/svg-with-js
+        fontAwesomeAddDataMask: '', // Reference: https://fontawesome.com/how-to-use/svg-with-js
+        fontAwesomeRemoveDataTransform: '', // Reference: https://fontawesome.com/how-to-use/svg-with-js
+        fontAwesomeRemoveDataMask: '', // Reference: https://fontawesome.com/how-to-use/svg-with-js
+        enableConfirmMessage: true, // Set to false to disable confirmation message when remove action triggered
+        confirmMessageText: 'Are you sure?' // Set your custom message[only available when enableConfirmMessage is set to true]
             // Please wait for more callback option.. coming soon..
 
     };
