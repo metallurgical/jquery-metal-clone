@@ -1,6 +1,7 @@
-/*===================================================================
+ /*
+ |-------------------------------------------------------------------
  | jQuery Metal Clone Plugins
- |===================================================================
+ |-------------------------------------------------------------------
  | http://thunderwide.com
  |
  | @category   Plugins
@@ -10,7 +11,8 @@
  | @copyright  (c) 2015 Norlihazmey(metallurgical)
  | @version    1.3.0
  | @Github     https://github.com/metallurgical/jquery-metal-clone
- |===================================================================*/
+ |-------------------------------------------------------------------
+ */
 
 ;
 (function($) {
@@ -73,6 +75,8 @@
                 confirmMessageText = opt.confirmMessageText,
                 enableAnimation = opt.enableAnimation,
                 animationSpeed = opt.animationSpeed,
+                enableScrollTop = opt.enableScrollTop,
+                scrollTopSpeed = opt.scrollTopSpeed,
                 defaultFontAwesomeTheme = ['regular', 'solid', 'brand', 'light', 'basic'],
                 onStart = opt.onStart,
                 onClone = opt.onClone,
@@ -122,7 +126,6 @@
             | cloned button, then system will provided one
             |
             */
-
             // initialize global variable for clone button
             var currentBtnClone;
             var btnClonePosition;
@@ -192,9 +195,11 @@
                 }
             }, generatedSelectorClass);
 
-            /*===============================================
+            /*
+            |-------------------------------------------------
             | When Clone button was clicked
-            |================================================*/
+            |-------------------------------------------------
+            */
             $(document).on('click', currentBtnClone, function() {
                 // Store the destination of cloned element
                 var $that = $(this);
@@ -351,6 +356,10 @@
                         }
 
                         if (enableAnimation) {
+
+                            var length = toClone.children('td').length;
+                            var currentIteration = 0;
+
                             toClone.children('td').children('div').hide().slideDown(function() {
                                 toClone.children('td').children('.' + metalRowElementWrapper).contents().unwrap();
                                 toClone.find('td').last().append(getRemoveButtonStructure('table'));
@@ -361,10 +370,35 @@
 
                                 clonedElement.push(toClone);
 
+                                (function (index) {
+                                    if (enableScrollTop) {
+                                        if (index == 1 && currentIteration == (length - 1)) {
+                                            $(document).triggerHandler('metal-event:scrollTop', {
+                                                cloned_element: toClone,
+                                                scroll_top_speed: scrollTopSpeed
+                                            });
+                                        }
+                                    }
+                                })(i)
+
+                                currentIteration++;
+
                             });
                         } else {
 
                             toClone.find('td').last().append(getRemoveButtonStructure('table'));
+
+                            (function (index) {
+                                if (enableScrollTop) {
+                                    if (index == 0) {
+                                        $(document).triggerHandler('metal-event:scrollTop', {
+                                            cloned_element: toClone,
+                                            scroll_top_speed: scrollTopSpeed
+                                        });
+                                    }
+                                }
+                            })(i)
+
                             if (!currentCopyValue) {
                                 clearForm(toClone);
                             }
@@ -383,7 +417,6 @@
                         toClone = cloneObj.clone();
 
                         if (enableAnimation) {
-
                             if (position === 'after') {
                                 destination.append(toClone.append(getRemoveButtonStructure('div')));
                                 destination.children().last().hide().slideDown(animationSpeed);
@@ -394,6 +427,17 @@
 
                         } else {
                             destination.prepend(toClone.append(getRemoveButtonStructure('div')));
+                        }
+
+                        if (enableScrollTop) {
+                            (function (index) {
+                                if (index == 0) {
+                                    $(document).triggerHandler('metal-event:scrollTop', {
+                                        cloned_element: toClone,
+                                        scroll_top_speed: scrollTopSpeed
+                                    });
+                                }
+                            })(i)
                         }
 
                         if (currentCopyValue) { /* never copy */ } else {
@@ -428,6 +472,17 @@
                                 destination.prepend(toClone.append(getRemoveButtonStructure('div')));
                             }
                         }
+
+                        (function (index) {
+                            if (enableScrollTop) {
+                                if (index == 0) {
+                                    $(document).triggerHandler('metal-event:scrollTop', {
+                                        cloned_element: toClone,
+                                        scroll_top_speed: scrollTopSpeed
+                                    });
+                                }
+                            }
+                        })(i)
 
                         if (currentCopyValue) { /* never copy */ } else {
                             clearForm(toClone);
@@ -513,7 +568,12 @@
                         }
 
                         if (enableAnimation) {
+
+                            var length = toClone.children('td').length;
+                            var currentIteration = 0;
+
                             toClone.children('td').children('div').hide().slideDown(function() {
+
                                 toClone.children('td').children('.' + metalRowElementWrapper).contents().unwrap();
                                 toClone.find('td').last().append(getRemoveButtonStructure('table'));
 
@@ -522,10 +582,35 @@
                                 }
 
                                 clonedElement.push(toClone);
+
+                                (function (index) {
+                                    if (enableScrollTop) {
+                                        if (index == 1 && currentIteration == (length - 1)) {
+                                            $(document).triggerHandler('metal-event:scrollTop', {
+                                                cloned_element: toClone,
+                                                scroll_top_speed: scrollTopSpeed
+                                            });
+                                        }
+                                    }
+                                })(i)
+
+                                currentIteration++;
                             });
 
                         } else {
                             toClone.find('td').last().append(getRemoveButtonStructure('table'));
+
+                            (function (index) {
+                                if (enableScrollTop) {
+                                    if (index == 0) {
+                                        $(document).triggerHandler('metal-event:scrollTop', {
+                                            cloned_element: toClone,
+                                            scroll_top_speed: scrollTopSpeed
+                                        });
+                                    }
+                                }
+                            })(i)
+
                             if (!currentCopyValue) {
                                 clearForm(toClone);
                             }
@@ -553,10 +638,32 @@
                         }
 
                         if (enableAnimation) {
-                            toClone.hide().slideDown(animationSpeed)
-                                .append(getRemoveButtonStructure('div'));
+
+                            (function (index) {
+                                toClone.hide().slideDown(animationSpeed, function () {
+                                    if (enableScrollTop) {
+                                        if (index == 0) {
+                                            $(document).triggerHandler('metal-event:scrollTop', {
+                                                cloned_element: toClone,
+                                                scroll_top_speed: scrollTopSpeed
+                                            });
+                                        }
+                                    }
+                                }).append(getRemoveButtonStructure('div'));
+                            })(i)
+
                         } else {
                             toClone.append(getRemoveButtonStructure('div'));
+                            (function (index) {
+                                if (enableScrollTop) {
+                                    if (index == 0) {
+                                        $(document).triggerHandler('metal-event:scrollTop', {
+                                            cloned_element: toClone,
+                                            scroll_top_speed: scrollTopSpeed
+                                        });
+                                    }
+                                }
+                            })(i);
                         }
 
                         if (!currentCopyValue) {
@@ -750,7 +857,6 @@
                 return name;
             }
 
-
             // check the cloned element meet the condition or not
             function limitHandler() {
 
@@ -916,7 +1022,9 @@
         enableConfirmMessage: true, // Set to false to disable confirmation message when remove action triggered
         confirmMessageText: 'Are you sure?', // Set your custom message[only available when enableConfirmMessage is set to true]
         enableAnimation: true, // Set to false to disable animation on clone and remove element
-        animationSpeed: 400 // Duration speed in millisecondss
+        animationSpeed: 400, // Duration speed in milliseconds,
+        enableScrollTop: true,
+        scrollTopSpeed: 1000,
             // Please wait for more callback option.. coming soon..
 
     };
@@ -924,6 +1032,15 @@
     $(document).on('metal-event:onClonedRemoved', function (event, data) {
         data.toRemoveElement.remove();
         if ($.isFunction(data.callback)) data.callback.call(data.base, data.toRemoveElement);
+    });
+
+    $(document).on('metal-event:scrollTop', function (event, data) {
+        console.log('scroll triggered')
+        console.log(data.cloned_element)
+
+        $('html,body').animate({
+            scrollTop: $(data.cloned_element).offset().top
+        }, data.scroll_top_speed);
     });
 
 })(jQuery);
