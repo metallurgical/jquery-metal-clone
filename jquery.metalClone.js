@@ -329,7 +329,6 @@
                 // table element but destination only table
                 // if selection is a table && destination a table
                 if (($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)) {
-                    console.log('a')
                     for (var i = 0; i < numberToClone; i++) {
                         check = limitHandler();
                         if (check) return;
