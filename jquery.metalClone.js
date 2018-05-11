@@ -201,10 +201,12 @@
             |-------------------------------------------------
             */
             $(document).on('click', currentBtnClone, function() {
+
                 // Store the destination of cloned element
                 var $that = $(this);
                 var destinationClone;
                 var toClone = "";
+
                 // immedietly invoked function
                 // if cancelClone & removeCloned
                 // function was called
@@ -220,10 +222,12 @@
                         if (flag) window[newTypeSelector + 'removeCloned'] = flag;
                     };
                 })(generatedSelectorClass);
+
                 // onClone callback accept 2 paramaters
                 // param1 - current cloned
                 // param2 - current object
                 if ($.isFunction(onClone)) onClone.call(base, base, cloned);
+
                 // checked for window variable
                 // if exist never proceed
                 // this for stopping cloned process
@@ -232,6 +236,7 @@
                     delete window[generatedSelectorClass + 'cancelClone'];
                     return;
                 }
+
                 // If destination provided,
                 // then use user defined destination
                 if (currentDestination !== false) {
@@ -274,6 +279,7 @@
 
                     delete window[generatedSelectorClass + 'removeCloned'];
                     $(toClone).remove();
+
                     // onClonedRemoved callback accept 1 paramater
                     // param1 - removed element
                     if ($.isFunction(onClonedRemoved)) onClonedRemoved.call(base, toClone);
@@ -326,6 +332,7 @@
                     toClone = "",
                     finalClonedElement = '',
                     clonedElement = [];
+
                 // If user put 0,
                 // Then assign 1 as a default value
                 // else use the provided value
@@ -379,7 +386,7 @@
                                             });
                                         }
                                     }
-                                })(i)
+                                })(i);
 
                                 currentIteration++;
 
@@ -397,7 +404,7 @@
                                         });
                                     }
                                 }
-                            })(i)
+                            })(i);
 
                             if (!currentCopyValue) {
                                 clearForm(toClone);
@@ -437,7 +444,7 @@
                                         scroll_top_speed: scrollTopSpeed
                                     });
                                 }
-                            })(i)
+                            })(i);
                         }
 
                         if (currentCopyValue) { /* never copy */ } else {
@@ -447,7 +454,7 @@
                         clonedElement.push(toClone);
                     }
                 }
-                // If selection is not a table && destination is a table
+                // If selection is not a table && destination is a table.
                 else if (($.inArray(nodeType, allNodeTableWithout) == -1) && ($.inArray(destinationNodeType, allNodeTableWithout) !== -1)) {
                     for (var i = 0; i < numberToClone; i++) {
                         check = limitHandler();
@@ -482,9 +489,9 @@
                                     });
                                 }
                             }
-                        })(i)
+                        })(i);
 
-                        if (currentCopyValue) { /* never copy */ } else {
+                        if (!currentCopyValue) {
                             clearForm(toClone);
                         }
 
@@ -492,7 +499,8 @@
                     }
 
                 }
-                // table element but destination not table element
+
+                // Table element but destination not table element.
                 else if (($.inArray(nodeType, allNodeTableWithout) !== -1) && ($.inArray(destinationNodeType, allNodeTableWithout) == -1)) {
                     console.error('MetalClone Error: Destination provided is not table element. Table rows should exist inside table element');
                     return false;
@@ -503,17 +511,17 @@
                 if ($.isArray(currentIds) && $.isEmptyObject(currentIds)) {
 
                     finalClonedElement = $.map(clonedElement, function(e, i) {
-                            return $(e).get(0)
-                        })
-                        //console.log(finalClonedElement)
+                        return $(e).get(0)
+                    });
                 }
+
                 // If user provided element in array container
                 // Then call the function
                 // pass the opt.ids array value[* or a few]
                 else if ($.isArray(currentIds) && !$.isEmptyObject(currentIds)) {
+
                     // call the function
                     finalClonedElement = idIncreament(currentIds);
-                    //console.log(finalClonedElement)
                 }
 
                 return finalClonedElement;
@@ -592,7 +600,7 @@
                                             });
                                         }
                                     }
-                                })(i)
+                                })(i);
 
                                 currentIteration++;
                             });
@@ -609,7 +617,7 @@
                                         });
                                     }
                                 }
-                            })(i)
+                            })(i);
 
                             if (!currentCopyValue) {
                                 clearForm(toClone);
@@ -619,6 +627,7 @@
                         }
                     }
                 }
+
                 // If selection is not a table
                 else if (($.inArray(nodeType, allNodeTableWithout) == -1)) {
 
@@ -650,7 +659,7 @@
                                         }
                                     }
                                 }).append(getRemoveButtonStructure('div'));
-                            })(i)
+                            })(i);
 
                         } else {
                             toClone.append(getRemoveButtonStructure('div'));
@@ -768,12 +777,14 @@
             function idIncreament(arr) {
 
                 var ids_value, clonedElement = [];
+
                 // Check if the paramter passed
                 // has *(all) symbol
                 // if yes, then find all element
                 if ($.inArray('*', arr)) {
                     ids_value = '*';
                 }
+
                 // find element provided in array
                 //  list only
                 else {
@@ -782,6 +793,7 @@
 
                 // iterate throught cloned container
                 $(generatedSelectorClass).not(':first').each(function(inc, e) {
+
                     // then find the element either * or a few
                     // depend on user defined and default value
                     $(this).find(ids_value).each(function(i, ee) {
@@ -791,14 +803,14 @@
                         // to ensure all the same clone element
                         // have unique id value
                         if ($(this).attr('id')) {
+
                             // Get the original value
                             var oldValue = $(this).attr('id');
                             var newValue = oldValue.replace(/\d+/g, '');
-                            //var increValue =
+
                             // Set the new id(s) value
                             $(this).attr('id', newValue + parseInt(inc));
                         }
-
                     });
 
                     clonedElement.push($(this).get(0));
@@ -808,11 +820,14 @@
                 return clonedElement;
             }
 
-            // check no of element was cloned
-            // this function for limit
+            /**
+             * Check no of element was cloned. This function for limit
+             * @returns {*}
+             */
             function checkLimit() {
 
                 var numberOfCloneElementExisted;
+
                 // if the selector is a class
                 // then no problem, just get length
                 // of all the element with same class existed
@@ -824,9 +839,11 @@
                 // else
                 //     numberOfCloneElementExisted = $('[id="' + base[0].id + '"]').length;
                 numberOfCloneElementExisted = $(generatedSelectorClass).length;
+
                 // if the clone limit option provided by users
                 // and the input is a number
                 if (cloneLimit != "infinity" && typeof cloneLimit == "number") {
+
                     // if number of clone element more than limit provided
                     // return false(not possible to clone element exceed limit)
                     // then return false
@@ -838,6 +855,7 @@
                         return numberOfCloneElementExisted;
                     }
                 }
+
                 // user not provided the limit
                 // then just use the default value
                 // default value is infinity
@@ -846,6 +864,10 @@
                 }
             }
 
+            /**
+             * Get selector name being select to clone.
+             * @returns {string}
+             */
             function getSelectorName() {
                 var name;
 
@@ -857,7 +879,10 @@
                 return name;
             }
 
-            // check the cloned element meet the condition or not
+            /**
+             * Check the cloned element meet the condition or not.
+             * @returns {boolean}
+             */
             function limitHandler() {
 
                 // get length of cloned element
@@ -875,6 +900,7 @@
 
                     flagProceed = true;
                 }
+
                 // if no limit, then assign 0 value as a default
                 // otherwise use the current length
                 else {
@@ -888,9 +914,11 @@
                     if ($(currentBtnClone).next().is('span')) {
                         $(currentBtnClone).next().html(cloneLimitText);
                     } else {
+
                         // call function to get selector name
                         // without .(class) or #(id) symbols
                         var selectorName = getSelectorName();
+
                         // create span element for error_limit message
                         // after clone button
                         $('<span/>', {
@@ -953,6 +981,7 @@
                 } else {
                     if (opt.enableAnimation) {
                         $(this).closest(generatedSelectorClass).slideUp(animationSpeed, function () {
+
                             // onClonedRemoved callback accept 1 paramater
                             // param1 - removed element
                             $(document).triggerHandler('metal-event:onClonedRemoved', {
@@ -974,9 +1003,7 @@
                 // current deleted element
                 $('body').find('[data-clone-reference="' + selectorName + '"]').remove();
             });
-
         });
-
     };
 
     $.fn.metalClone.defaults = {
@@ -1023,21 +1050,23 @@
         confirmMessageText: 'Are you sure?', // Set your custom message[only available when enableConfirmMessage is set to true]
         enableAnimation: true, // Set to false to disable animation on clone and remove element
         animationSpeed: 400, // Duration speed in milliseconds,
-        enableScrollTop: true,
-        scrollTopSpeed: 1000,
-            // Please wait for more callback option.. coming soon..
-
+        enableScrollTop: true, // Set to false to disable page from scrolling to newly created element
+        scrollTopSpeed: 1000, // Default speed scroll top
+        // Please wait for more callback option.. coming soon..
     };
 
+    /**
+     * [Event listener] Triggered when remove cloned element.
+     */
     $(document).on('metal-event:onClonedRemoved', function (event, data) {
         data.toRemoveElement.remove();
         if ($.isFunction(data.callback)) data.callback.call(data.base, data.toRemoveElement);
     });
 
+    /**
+     * [Event Listener] Triggered when "enableScrollTop" option is enable.
+     */
     $(document).on('metal-event:scrollTop', function (event, data) {
-        console.log('scroll triggered')
-        console.log(data.cloned_element)
-
         $('html,body').animate({
             scrollTop: $(data.cloned_element).offset().top
         }, data.scroll_top_speed);
