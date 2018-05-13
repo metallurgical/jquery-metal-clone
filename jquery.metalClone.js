@@ -312,7 +312,7 @@
                     }
                 }
                 return path;
-            };
+            }
 
             /*
             |----------------------------------------------------
@@ -351,7 +351,7 @@
 
                             toClone.children('td').wrapInner('<div class="' + metalRowElementWrapper + '"></div>');
                             toClone.children('td').each(function(index, element) {
-                                $(element).children('div').slideDown()
+                                $(element).children('div').slideDown();
                             });
 
                         }
@@ -511,7 +511,7 @@
                 if ($.isArray(currentIds) && $.isEmptyObject(currentIds)) {
 
                     finalClonedElement = $.map(clonedElement, function(e, i) {
-                        return $(e).get(0)
+                        return $(e).get(0);
                     });
                 }
 
@@ -565,7 +565,7 @@
                         if (enableAnimation) {
                             toClone.children('td').wrapInner('<div class="' + metalRowElementWrapper + '"></div>');
                             toClone.children('td').each(function(index, element) {
-                                $(element).children('div').slideDown()
+                                $(element).children('div').slideDown();
                             });
                         }
 
@@ -643,7 +643,7 @@
                         if (position === 'after') {
                             toClone.insertAfter(destination);
                         } else {
-                            toClone.insertBefore(destination)
+                            toClone.insertBefore(destination);
                         }
 
                         if (enableAnimation) {
@@ -687,8 +687,8 @@
                 // is a default value
                 if ($.isArray(currentIds) && $.isEmptyObject(currentIds)) {
                     finalClonedElement = $.map(clonedElement, function(e, i) {
-                        return $(e).get(0)
-                    })
+                        return $(e).get(0);
+                    });
                 }
 
                 // If user provided element in array container
@@ -725,6 +725,7 @@
             function getRemoveButtonStructure(type) {
 
                 var iconContent = '';
+                var output = '';
 
                 if (enableIcon) {
                     iconContent = '<i class="' + getFontAwesomeThemeType() + ' ' + fontAwesomeRemoveClass + '" data-fa-transform="' + fontAwesomeRemoveDataTransform + '" data-fa-mask="' + fontAwesomeRemoveDataMask + '"></i> ';
@@ -732,11 +733,13 @@
 
                 switch (type) {
                     case 'table':
-                        return '<div class="operation-container"><div class="operations"><div class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove operationsImg" data-metal-ref="' + generatedSelectorClass + '">' + iconContent + '<span>' + currentBtnRemoveText + '</span></div></div></div>';
+                        output = '<div class="operation-container"><div class="operations"><div class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove operationsImg" data-metal-ref="' + generatedSelectorClass + '">' + iconContent + '<span>' + currentBtnRemoveText + '</span></div></div></div>';
                         break;
                     default:
-                        return '<button type="button" class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove ' + ((opt.btnRemoveClass && typeof opt.btnRemoveClass !== 'number') ? opt.btnRemoveClass : '') + '" style="margin-bottom: 20px" data-metal-ref="' + generatedSelectorClass + '">' + iconContent + currentBtnRemoveText + '</button>';
+                        output = '<button type="button" class="' + generatedSelectorClassForRemoveBtn + ' metal-btn-remove ' + ((opt.btnRemoveClass && typeof opt.btnRemoveClass !== 'number') ? opt.btnRemoveClass : '') + '" style="margin-bottom: 20px" data-metal-ref="' + generatedSelectorClass + '">' + iconContent + currentBtnRemoveText + '</button>';
                 }
+
+                return output;
             }
 
             /**
@@ -750,22 +753,26 @@
                     return 'far';
                 }
 
+                var theme;
+
                 switch (fontAwesomeTheme) {
                     case 'solid':
-                        return 'fas';
+                        theme = 'fas';
                         break;
                     case 'brand':
-                        return 'fab';
+                        theme = 'fab';
                         break;
                     case 'light':
-                        return 'fal';
+                        theme = 'fal';
                         break;
                     case 'basic':
-                        return 'fa';
+                        theme = 'fa';
                         break;
                     default:
-                        return 'far';
+                        theme = 'far';
                 }
+
+                return theme;
             }
 
             /**
@@ -910,7 +917,7 @@
                 // if cloned element already exceed limit provided
                 // stop current process
                 if (canProceed > cloneLimit) {
-                    console.log("Can't clone more than limit provided")
+                    console.log("Can't clone more than limit provided");
                     if ($(currentBtnClone).next().is('span')) {
                         $(currentBtnClone).next().html(cloneLimitText);
                     } else {
@@ -970,7 +977,7 @@
                                     });
                                 }
                             });
-                        })
+                        });
                     } else {
                         $(document).triggerHandler('metal-event:onClonedRemoved', {
                             base: base,
