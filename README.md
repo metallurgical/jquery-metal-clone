@@ -17,7 +17,7 @@ Simple plugin to clone HTML DOM element.
 
 # Current Stable #
 
--	[**V1.4.0**](https://github.com/metallurgical/jquery-metal-clone/archive/v1.4.0.zip "V1.4.0")
+-	[**V1.4.1**](https://github.com/metallurgical/jquery-metal-clone/archive/v1.4.0.zip "V1.4.1")
 
 # How To Install #
 
