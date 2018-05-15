@@ -1,4 +1,7 @@
 # Changelog
+## [v1.4.1] - 2018-05-15
+### Added
+Minor adjustment
 
 ## [v1.4.0] - 2018-05-15
 ### Added
