@@ -22,13 +22,13 @@ Simple plugin to clone HTML DOM element.
 # How To Install #
 
 ## Bower
-- `bower install jquery-metal-clone --save`
+`bower install jquery-metal-clone --save`
 
 ## Yarn
-- `yarn add jquery-metal-clone`
+`yarn add jquery-metal-clone`
 
 ## Npm
-- `npm install jquery-metal-clone --save`
+`npm install jquery-metal-clone --save`
 
 Installation is so very easy. Download the current stable and see the example in Demo page. Here is the manual step to follow :
 
