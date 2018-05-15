@@ -2,4 +2,5 @@
 # http://git-scm.com/docs/gitignore
 
 node_modules/
+.idea
 

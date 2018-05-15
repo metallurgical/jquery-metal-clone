@@ -5,9 +5,8 @@
  | http://thunderwide.com
  |
  | @category   Plugins
- | @author     Norlihazmey <norlihazmey89@thunderwide.com>
- | @license    Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
- |             and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ | @author     Norlihazmey Ghazali <norlihazmey89@thunderwide.com>
+ | @license    Licensed under MIT (http://www.opensource.org/licenses/mit-license.php).
  | @copyright  (c) 2015 Norlihazmey(metallurgical)
  | @version    1.3.0
  | @Github     https://github.com/metallurgical/jquery-metal-clone

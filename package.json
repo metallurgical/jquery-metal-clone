@@ -1,6 +1,6 @@
 {
   "name": "jquery-metal-clone",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "jQuery plugin clone DOM element",
   "main": "index.js",
   "dependencies": {
@@ -17,14 +17,13 @@
     "jquery",
     "cool"
   ],
-  "repository": { 
+  "repository": {
     "url": "https://github.com/metallurgical/jquery-metal-clone",
     "type": "git"
   },
   "author": "norlihazmey.ghazali@gmail.com",
-  "bugs": { 
-    "url": "https://github.com/metallurgical/jquery-metal-clone/issues" 
+  "bugs": {
+    "url": "https://github.com/metallurgical/jquery-metal-clone/issues"
   },
-  "version": "1.3.0",
   "license": "MIT"
 }
