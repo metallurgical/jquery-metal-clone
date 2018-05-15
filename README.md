@@ -19,17 +19,16 @@ Simple plugin to clone HTML DOM element.
 
 -	[**V1.4.0**](https://github.com/metallurgical/jquery-metal-clone/archive/v1.4.0.zip "V1.4.0")
 
+# How To Install #
 
-# Using Bower #
+## Bower
 - `bower install jquery-metal-clone --save`
 
-# Using Yarn #
+## Yarn
 - `yarn add jquery-metal-clone`
 
-# Using Npm #
+## Npm
 - `npm install jquery-metal-clone --save`
-
-# How To Install #
 
 Installation is so very easy. Download the current stable and see the example in Demo page. Here is the manual step to follow :
 
@@ -42,12 +41,12 @@ Installation is so very easy. Download the current stable and see the example in
 Navigate to [Documentation](https://metallurgical.github.io/jquery-metal-clone "Jquery Metal Clone").
 
 # Dependencies #
--	Font awesome
+-	Font awesome [Can be disable via provided option]
 
 # Support #
 
 -	If you found a bug or something technical problem, please open an issues.
--	If the example/usage above did't clear enough, leave me some note by sending email at **norlihazmey89@gmail.com**
+-	If the example/usage above did't clear enough, leave me some note by sending email at **norlihazmey.ghazali@gmail.com**
 -	If encountered any problems, just ask it from **stackoverflow.com** by using this tag : `jquery-metal-clone`
 - Spread the words about this plugin :)
 
