@@ -1,3 +1,22 @@
+<p align="center">
+  <a href="https://travis-ci.org/evcohen/jquery-metal-clone">
+    <img src="https://api.travis-ci.org/evcohen/eslint-plugin-jsx-a11y.svg?branch=master"
+         alt="build status">
+  </a>
+  <a href="https://npmjs.org/package/jquery-metal-clone">
+    <img src="https://img.shields.io/npm/v/jquery-metal-clone.svg"
+         alt="npm version">
+  </a>
+  <a href="https://github.com/evcohen/jquery-metal-clone/blob/master/LICENSE.md">
+    <img src="https://img.shields.io/npm/l/jquery-metal-clone.svg"
+         alt="license">
+  </a>
+  <a href='https://npmjs.org/package/jquery-metal-clone'>
+    <img src='https://img.shields.io/npm/dt/jquery-metal-clone.svg'
+    alt='Total npm downloads' />
+  </a>
+</p>
+
 # Jquery Metal Clone Plugin
 
 Simple plugin to clone HTML DOM element. 
