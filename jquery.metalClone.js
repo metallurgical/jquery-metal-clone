@@ -13,7 +13,6 @@
  |-------------------------------------------------------------------
  */
 
-;
 (function($) {
 
     $.fn.metalClone = function(options, callback) {
@@ -53,6 +52,7 @@
                 nodeType = base[0].nodeName,
                 // Capture the configuration options
                 currentCopyValue = opt.copyValue,
+                currentClearExceptions = opt.clearExceptions,
                 currentPosition = opt.position,
                 currentNumberToClone = opt.numberToClone,
                 currentDestination = opt.destination,
@@ -711,7 +711,7 @@
             function clearForm(container) {
 
                 container.find('input:not("input[type=button], input[type=submit], input[type=checkbox], input[type=radio]"), textarea, select').each(function() {
-                    $(this).val('');
+                    $ (this).not(currentClearExceptions).val('');
                 });
             }
 
@@ -1032,6 +1032,7 @@
 
         btnClone: null, // Put your selector(button class or id name) eg : .clickMe | #clickMe
         copyValue: false, // Clone together the previous element value - available for form element only
+        clearExceptions: '', // Make exception for elements that you do not want to clear: eg: '.my_exception_element, #my_exception_element'
         btnRemoveText: 'Remove', // Text appear on remove button
         btnRemoveClass: null, // Adding user defined class name for remove button
         btnCloneText: 'Create New Element', // Text appear on clone button
