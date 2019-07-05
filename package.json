@@ -1,6 +1,6 @@
 {
   "name": "jquery-metal-clone",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "jQuery plugin clone DOM element",
   "main": "index.js",
   "dependencies": {
