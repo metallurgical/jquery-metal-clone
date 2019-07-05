@@ -374,8 +374,6 @@
                                     clearForm(toClone);
                                 }
 
-                                clonedElement.push(toClone);
-
                                 (function (index) {
                                     if (enableScrollTop) {
                                         if (index == 1 && currentIteration == (length - 1)) {
@@ -409,8 +407,9 @@
                                 clearForm(toClone);
                             }
 
-                            clonedElement.push(toClone);
                         }
+
+                        clonedElement.push(toClone);
                     }
                 }
                 // not table element and destination not table element
@@ -588,8 +587,6 @@
                                     clearForm(toClone);
                                 }
 
-                                clonedElement.push(toClone);
-
                                 (function (index) {
                                     if (enableScrollTop) {
                                         if (index == 1 && currentIteration == (length - 1)) {
@@ -622,8 +619,9 @@
                                 clearForm(toClone);
                             }
 
-                            clonedElement.push(toClone);
                         }
+
+                        clonedElement.push(toClone);
                     }
                 }
 
