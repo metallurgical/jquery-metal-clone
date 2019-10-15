@@ -135,3 +135,7 @@ pre[class*="language-"] {
 	cursor: help;
 }
 
+.token.capitalize {
+	text-transform: capitalize;
+}
+
